@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Bandeau Transparent</title>
+    <style>
+        body {
+            background-color: Transparent;
+            color: black;
+            font-size: 2em;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <div>
+        Combatant Rouge : <span id="scoreRouge">0</span> - Combatant Vert : <span id="scoreVert">0</span>
+    </div>
+
+    <script>
+        const socket = io();
+
+        socket.on('maj_affichage', (data) => {
+            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
+            document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
+        });
+    </script>
+</body>
+</html>

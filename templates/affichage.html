@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Affichage des Scores</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>Scores en Direct</h1>
+    <div>
+        <h2>Combatant Rouge : <span id="scoreRouge">0</span></h2>
+        <h2>Combatant Vert : <span id="scoreVert">0</span></h2>
+    </div>
+
+    <script>
+        const socket = io();
+
+        socket.on('maj_affichage', (data) => {
+            document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
+            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
+        });
+
+    </script>
+</body>
+</html>

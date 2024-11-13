@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Interface d'Arbitrage</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+
+   <style>
+    /* Empêche la sélection de texte sur toute la page */
+    * {
+        user-select: none;
+    }
+    </style>
+
+
+
+</head>
+<body>
+    <h1>Interface d'Arbitrage</h1>
+    <div>
+        <h2>Scores</h2>
+
+        <!-- Combatant Rouge -->
+        <p>Combattant Rouge : <span id="scoreRouge">0</span></p>
+        <button onmousedown="handlePress('Combatant_Rouge', 1)" onmouseup="clearPress('Combatant_Rouge', 1)" onmouseleave="clearPress()">+1</button>
+        <button onmousedown="handlePress('Combatant_Rouge', 3)" onmouseup="clearPress('Combatant_Rouge', 3)" onmouseleave="clearPress()">+3</button>
+        <button onmousedown="handlePress('Combatant_Rouge', 5)" onmouseup="clearPress('Combatant_Rouge', 5)" onmouseleave="clearPress()">+5</button>
+
+        <!-- Cartons pour Combatant Rouge -->
+        <p>Cartons Combattant Rouge :
+            <span id="cartonsRouge">Blanc: 0, Jaune: 0, Rouge: 0</span>
+        </p>
+        <button onmousedown="handleCartonPress('Combatant_Rouge', 'blanc')" onmouseup="clearCartonPress('Combatant_Rouge', 'blanc')" onmouseleave="clearCartonPress()">Carton Blanc</button>
+        <button onmousedown="handleCartonPress('Combatant_Rouge', 'jaune')" onmouseup="clearCartonPress('Combatant_Rouge', 'jaune')" onmouseleave="clearCartonPress()">Carton Jaune</button>
+        <button onmousedown="handleCartonPress('Combatant_Rouge', 'rouge')" onmouseup="clearCartonPress('Combatant_Rouge', 'rouge')" onmouseleave="clearCartonPress()">Carton Rouge</button>
+
+        <!-- Combatant Vert -->
+        <p>Combattant Vert : <span id="scoreVert">0</span></p>
+        <button onmousedown="handlePress('Combatant_Vert', 1)" onmouseup="clearPress('Combatant_Vert', 1)" onmouseleave="clearPress()">+1</button>
+        <button onmousedown="handlePress('Combatant_Vert', 3)" onmouseup="clearPress('Combatant_Vert', 3)" onmouseleave="clearPress()">+3</button>
+        <button onmousedown="handlePress('Combatant_Vert', 5)" onmouseup="clearPress('Combatant_Vert', 5)" onmouseleave="clearPress()">+5</button>
+
+        <!-- Cartons pour Combatant Vert -->
+        <p>Cartons Combattant Vert :
+            <span id="cartonsVert">Blanc: 0, Jaune: 0, Rouge: 0</span>
+        </p>
+        <button onmousedown="handleCartonPress('Combatant_Vert', 'blanc')" onmouseup="clearCartonPress('Combatant_Vert', 'blanc')" onmouseleave="clearCartonPress()">Carton Blanc</button>
+        <button onmousedown="handleCartonPress('Combatant_Vert', 'jaune')" onmouseup="clearCartonPress('Combatant_Vert', 'jaune')" onmouseleave="clearCartonPress()">Carton Jaune</button>
+        <button onmousedown="handleCartonPress('Combatant_Vert', 'rouge')" onmouseup="clearCartonPress('Combatant_Vert', 'rouge')" onmouseleave="clearCartonPress()">Carton Rouge</button>
+    </div>
+
+    <script>
+    const socket = io();
+    let pressTimer, cartonPressTimer;
+    let isLongPress = false;
+
+    function handlePress(combatant, valeur) {
+        isLongPress = false;
+        pressTimer = setTimeout(() => {
+            isLongPress = true;
+            majScore(combatant, -valeur);
+        }, 1000); // 1 seconde pour un appui long
+    }
+
+    function clearPress(combatant, valeur) {
+        clearTimeout(pressTimer);
+        if (!isLongPress && combatant && valeur) {
+            majScore(combatant, valeur);
+        }
+    }
+
+    function majScore(combatant, valeur) {
+        socket.emit('maj_score', { combatant, valeur });
+    }
+
+    // Gestion de l'appui long pour les cartons
+    function handleCartonPress(combatant, carton) {
+        isLongPress = false;
+        cartonPressTimer = setTimeout(() => {
+            isLongPress = true;
+            majCarton(combatant, carton, -1); // Enlève un carton en cas d'appui long
+        }, 1000);
+    }
+
+    function clearCartonPress(combatant, carton) {
+        clearTimeout(cartonPressTimer);
+        if (!isLongPress && combatant && carton) {
+            majCarton(combatant, carton, 1); // Ajoute un carton
+        }
+    }
+
+    function majCarton(combatant, carton, valeur) {
+        socket.emit('maj_carton', { Combatant: combatant, carton: carton, valeur: valeur });
+    }
+
+       // Écoute les mises à jour de l'affichage des scores et des cartons
+    socket.on('maj_affichage', (data) => {
+        // Vérifie si les données sont bien au format attendu
+        if (data.Combatant_Rouge && data.Combatant_Vert) {
+            // Mise à jour des scores
+            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
+            document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
+
+            // Mise à jour des cartons
+            document.getElementById('cartonsRouge').innerText = `Blanc: ${data.Combatant_Rouge.cartons_blanc}, Jaune: ${data.Combatant_Rouge.cartons_jaune}, Rouge: ${data.Combatant_Rouge.cartons_rouge}`;
+            document.getElementById('cartonsVert').innerText = `Blanc: ${data.Combatant_Vert.cartons_blanc}, Jaune: ${data.Combatant_Vert.cartons_jaune}, Rouge: ${data.Combatant_Vert.cartons_rouge}`;
+        } else {
+            console.error("Données reçues dans un format inattendu", data);
+        }
+    });
+    </script>
+</body>
+</html>
