@@ -9,40 +9,111 @@
         * {
             user-select: none;
         }
+
+        button {
+            font-size: 20px; /* Définir la taille de police pour tous les boutons */
+            padding: 0 15px;
+            background-color: rgb(176, 176, 176);
+            color: black;
+            border: 2px solid rgb(94, 94, 94);
+        }
+
+        h1 {font-size: 45px;  /* Augmenter la taille du texte pour les <h1> */
+            color : white}
+        p {font-size: 25px;  /* Augmenter la taille du texte pour les <p> */  
+            color : white}
+
+
+                /* Personnaliser la taille des scores uniquement */
+                #scoreRouge, #scoreVert {
+            font-size: 50px;  /* Taille du texte des scores */
+            font-weight: bold; /* Rendre les scores plus visibles */
+        }
+
+        /* Personnaliser la couleur de fond des cellules contenant les scores */
+        .score-cell {
+            text-align: center;  /* Centrer le texte */
+            padding: 65px;
+        }
+
+        /* Fond rouge pour le score du combattant Rouge */
+        .score-rouge {
+            background-color: rgb(165, 23, 23);
+            color: white;  /* Texte en blanc sur fond rouge */
+        }
+
+        /* Fond vert pour le score du combattant Vert */
+        .score-vert {
+            background-color: rgb(22, 93, 22);
+            color: white;  /* Texte en blanc sur fond vert */
+        }
+
+                /* Personnaliser les couleurs des boutons de carton */
+                #cartonBlancRouge, #cartonBlancVert {
+            background-color: white;
+            color : black;
+            border: 2px solid gray;
+        }
+        
+        #cartonJauneRouge, #cartonJauneVert {
+            background-color: yellow;
+            color: black;
+            border: 2px solid goldenrod;
+        }
+        
+        #cartonRougeRouge, #cartonRougeVert {
+            background-color: darkred;
+            color: white;
+            border: 2px solid crimson;
+        }
+        
+
+        body {
+    background-color: #636060; /* Gris clair */
+}
     </style>
 </head>
 <body>
-    <h1>Interface d'Arbitrage</h1>
-    <div>
-        <h2>Scores</h2>
+<center>
+    <h1>Arene {{ num_arene }} </h1>
+    <div>   
 
-        <!-- Combatant Rouge -->
-        <p>Combattant Rouge : <span id="scoreRouge">0</span></p>
-        <button id="buttonRouge1">+1</button>
-        <button id="buttonRouge3">+3</button>
-        <button id="buttonRouge5">+5</button>
+    <table>          
+        <tr> 
+            <td style="padding-right: 75px;"> <center><h1> {{combatant.Rouge.nom}}</h1> </center> </td> 
+            <td> <center> <h1> {{combatant.Vert.nom}} </h1></center> </td>
+        </tr>
 
-        <!-- Cartons pour Combatant Rouge -->
-             <p>Cartons Combattant Rouge :
-            <span id="cartons_cbt_Rouge">Blanc: 0, Jaune: 0, Rouge: 0</span>
-        </p>
-        <button id="cartonBlancRouge">Carton Blanc</button>
-        <button id="cartonJauneRouge">Carton Jaune</button>
-        <button id="cartonRougeRouge">Carton Rouge</button>
+        <tr>
+            <td class="score-cell score-rouge"> 
+                <p><center><h1> <span id="scoreRouge">0</span> </h1></p> 
+                <button id="buttonRouge1"> 1 point </button>
+                <button id="buttonRouge3"> 3 points </button>
+                <button id="buttonRouge5"> 5 points </button> </center></td>
 
-        <!-- Combatant Vert -->
-        <p>Combattant Vert : <span id="scoreVert">0</span></p>
-        <button id="buttonVert1">+1</button>
-        <button id="buttonVert3">+3</button>
-        <button id="buttonVert5">+5</button>
+            <td class="score-cell score-vert"> <p><center><h1> <span id="scoreVert">0</span> </h1></p>
+                <button id="buttonVert1"> 1 point </button>
+                <button id="buttonVert3"> 3 points </button>
+                <button id="buttonVert5"> 5 points </button> </center></td>
+        </tr>
 
-        <!-- Cartons pour Combatant Vert -->
-            <p>Cartons Combattant Rouge :
-            <span id="cartons_cbt_Vert">Blanc: 0, Jaune: 0, Rouge: 0</span>
-        </p>
-         <button id="cartonBlancVert">Carton Blanc</button>
-         <button id="cartonJauneVert">Carton Jaune</button>
-         <button id="cartonRougeVert">Carton Rouge</button>
+
+        <tr>
+<td><center>
+    <p>Cartons:<span id="cartons_cbt_Rouge">Blanc: 0, Jaune: 0, Rouge: 0</span> </p>
+    <button id="cartonBlancRouge">Carton Blanc</button>
+    <button id="cartonJauneRouge">Carton Jaune</button>
+    <button id="cartonRougeRouge">Carton Rouge</button></center></td>
+
+
+<td><center>
+    <p>Cartons : <span id="cartons_cbt_Vert">Blanc: 0, Jaune: 0, Rouge: 0</span> </p>
+     <button id="cartonBlancVert">Carton Blanc</button>
+     <button id="cartonJauneVert">Carton Jaune</button>
+     <button id="cartonRougeVert">Carton Rouge</button></center></td>
+        </tr>
+    </table>
+</center>
     </div>
 
     <script>
