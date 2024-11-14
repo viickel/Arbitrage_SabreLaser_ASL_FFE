@@ -1,0 +1,75 @@
+/* Empêche la sélection de texte sur toute la page */
+* {
+    user-select: none;
+}
+
+/* Styles généraux */
+table {
+    width: 100%;
+}
+
+body {
+    background-color: #5a595c; /* Gris clair */
+}
+
+h1 {
+    font-size: 30px;  /* Taille de police des titres */
+    color: white;
+}
+
+p {
+    font-size: 20px;  /* Taille de police des paragraphes */
+    color: white;
+}
+
+/* Boutons généraux */
+button {
+    font-size: 20px;
+    padding: 0 15px;
+    background-color: rgb(176, 176, 176);
+    color: black;
+    border: 2px solid rgb(94, 94, 94);
+}
+
+/* Styles des scores */
+#scoreRouge, #scoreVert {
+    font-size: 50px;  /* Taille de police des scores */
+    font-weight: bold; /* Gras pour mettre en valeur */
+}
+
+/* Cellules de scores */
+.score-cell {
+    text-align: center;
+    padding: 10px;
+}
+
+/* Fond rouge pour le score du combattant Rouge */
+.score-rouge {
+    background-color: rgb(165, 23, 23);
+    color: white; 
+}
+
+/* Fond vert pour le score du combattant Vert */
+.score-vert {
+    background-color: rgb(22, 93, 22);
+    color: white;
+}
+
+/* Couleurs spécifiques des boutons de carton */
+#cartonBlancRouge, #cartonBlancVert {
+    background-color: white;
+    color: black;
+    border: 2px solid gray;
+}
+
+#cartonJauneRouge, #cartonJauneVert {
+    background-color: yellow;
+    color: black;
+    border: 2px solid goldenrod;
+}
+
+#cartonRougeRouge, #cartonRougeVert {
+    background-color: darkred;
+    color: white;
+    border: 2px solid crimson;
+}
