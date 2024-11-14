@@ -4,110 +4,347 @@
     <meta charset="UTF-8">
     <title>Interface d'Arbitrage</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <style>
+        /* Empêche la sélection de texte sur toute la page */
+        * {
+            user-select: none;
+        }
+        table {
+            width: 100%;
+        }
+        button {
+            font-size: 20px; /* Définir la taille de police pour tous les boutons */
+            padding: 0 15px;
+            background-color: rgb(176, 176, 176);
+            color: black;
+            border: 2px solid rgb(94, 94, 94);
+        }
 
-   <style>
-    /* Empêche la sélection de texte sur toute la page */
-    * {
-        user-select: none;
-    }
+        h1 {font-size: 30px;  /* Augmenter la taille du texte pour les <h1> */
+            color : white}
+        p {font-size: 20px;  /* Augmenter la taille du texte pour les <p> */  
+            color : white}
+
+
+                /* Personnaliser la taille des scores uniquement */
+                #scoreRouge, #scoreVert {
+            font-size: 50px;  /* Taille du texte des scores */
+            font-weight: bold; /* Rendre les scores plus visibles */
+        }
+
+        /* Personnaliser la couleur de fond des cellules contenant les scores */
+        .score-cell {
+            text-align: center;  /* Centrer le texte */
+            padding: 10px;
+        }
+
+        /* Fond rouge pour le score du combattant Rouge */
+        .score-rouge {
+            background-color: rgb(165, 23, 23);
+            color: white;  /* Texte en blanc sur fond rouge */
+        }
+
+        /* Fond vert pour le score du combattant Vert */
+        .score-vert {
+            background-color: rgb(22, 93, 22);
+            color: white;  /* Texte en blanc sur fond vert */
+        }
+
+                /* Personnaliser les couleurs des boutons de carton */
+                #cartonBlancRouge, #cartonBlancVert {
+            background-color: white;
+            color : black;
+            border: 2px solid gray;
+        }
+        
+        #cartonJauneRouge, #cartonJauneVert {
+            background-color: yellow;
+            color: black;
+            border: 2px solid goldenrod;
+        }
+        
+        #cartonRougeRouge, #cartonRougeVert {
+            background-color: darkred;
+            color: white;
+            border: 2px solid crimson;
+        }
+        
+
+        body {
+    background-color: #5a595c; /* Gris clair */
+}
     </style>
-
-
-
 </head>
 <body>
-    <h1>Interface d'Arbitrage</h1>
-    <div>
-        <h2>Scores</h2>
+<center>
+    <h1>Arene {{ num_arene }} </h1>
+    <div>   
 
-        <!-- Combatant Rouge -->
-        <p>Combattant Rouge : <span id="scoreRouge">0</span></p>
-        <button onmousedown="handlePress('Combatant_Rouge', 1)" onmouseup="clearPress('Combatant_Rouge', 1)" onmouseleave="clearPress()">+1</button>
-        <button onmousedown="handlePress('Combatant_Rouge', 3)" onmouseup="clearPress('Combatant_Rouge', 3)" onmouseleave="clearPress()">+3</button>
-        <button onmousedown="handlePress('Combatant_Rouge', 5)" onmouseup="clearPress('Combatant_Rouge', 5)" onmouseleave="clearPress()">+5</button>
+    <table>          
+        <tr> 
+            <td style="padding-right: 75px;"> <center><h1> {{combatant.Rouge.nom}}</h1> </center> </td> 
+            <td> <center> <h1> {{combatant.Vert.nom}} </h1></center> </td>
+        </tr>
 
-        <!-- Cartons pour Combatant Rouge -->
-        <p>Cartons Combattant Rouge :
-            <span id="cartonsRouge">Blanc: 0, Jaune: 0, Rouge: 0</span>
-        </p>
-        <button onmousedown="handleCartonPress('Combatant_Rouge', 'blanc')" onmouseup="clearCartonPress('Combatant_Rouge', 'blanc')" onmouseleave="clearCartonPress()">Carton Blanc</button>
-        <button onmousedown="handleCartonPress('Combatant_Rouge', 'jaune')" onmouseup="clearCartonPress('Combatant_Rouge', 'jaune')" onmouseleave="clearCartonPress()">Carton Jaune</button>
-        <button onmousedown="handleCartonPress('Combatant_Rouge', 'rouge')" onmouseup="clearCartonPress('Combatant_Rouge', 'rouge')" onmouseleave="clearCartonPress()">Carton Rouge</button>
+        <tr>
+            <td class="score-cell score-rouge"> 
+                <p><center><h1> {{combatant.Rouge.score}} </h1></p> 
+                <button id="buttonRouge1"> 1 point </button>
+                <button id="buttonRouge3"> 3 points </button>
+                <button id="buttonRouge5"> 5 points </button> </center></td>
 
-        <!-- Combatant Vert -->
-        <p>Combattant Vert : <span id="scoreVert">0</span></p>
-        <button onmousedown="handlePress('Combatant_Vert', 1)" onmouseup="clearPress('Combatant_Vert', 1)" onmouseleave="clearPress()">+1</button>
-        <button onmousedown="handlePress('Combatant_Vert', 3)" onmouseup="clearPress('Combatant_Vert', 3)" onmouseleave="clearPress()">+3</button>
-        <button onmousedown="handlePress('Combatant_Vert', 5)" onmouseup="clearPress('Combatant_Vert', 5)" onmouseleave="clearPress()">+5</button>
+            <td class="score-cell score-vert"> 
+                <p><center><h1> {{combatant.Vert.score}} </h1></p>
+                <button id="buttonVert1"> 1 point </button>
+                <button id="buttonVert3"> 3 points </button>
+                <button id="buttonVert5"> 5 points </button> </center></td>
+        </tr>
 
-        <!-- Cartons pour Combatant Vert -->
-        <p>Cartons Combattant Vert :
-            <span id="cartonsVert">Blanc: 0, Jaune: 0, Rouge: 0</span>
-        </p>
-        <button onmousedown="handleCartonPress('Combatant_Vert', 'blanc')" onmouseup="clearCartonPress('Combatant_Vert', 'blanc')" onmouseleave="clearCartonPress()">Carton Blanc</button>
-        <button onmousedown="handleCartonPress('Combatant_Vert', 'jaune')" onmouseup="clearCartonPress('Combatant_Vert', 'jaune')" onmouseleave="clearCartonPress()">Carton Jaune</button>
-        <button onmousedown="handleCartonPress('Combatant_Vert', 'rouge')" onmouseup="clearCartonPress('Combatant_Vert', 'rouge')" onmouseleave="clearCartonPress()">Carton Rouge</button>
+
+        <tr>
+<td><center>
+    <p>Cartons:<span id="cartons_cbt_Rouge">Blanc: {{combatant.Rouge.cartons_blanc}}, Jaune: {{combatant.Rouge.cartons_jaune}}, Rouge: {{combatant.Rouge.cartons_rouge}}</span> </p>
+    <button id="cartonBlancRouge">Carton Blanc</button>
+    <button id="cartonJauneRouge">Carton Jaune</button>
+    <button id="cartonRougeRouge">Carton Rouge</button></center></td>
+
+
+<td><center>
+    <p>Cartons : <span id="cartons_cbt_Vert">Blanc: {{combatant.Vert.cartons_blanc}}, Jaune: {{combatant.Vert.cartons_jaune}}, Rouge: {{combatant.Vert.cartons_rouge}}</span> </p>
+     <button id="cartonBlancVert">Carton Blanc</button>
+     <button id="cartonJauneVert">Carton Jaune</button>
+     <button id="cartonRougeVert">Carton Rouge</button></center></td>
+        </tr>
+    </table>
+</center>
     </div>
 
     <script>
-    const socket = io();
-    let pressTimer, cartonPressTimer;
-    let isLongPress = false;
+        // Variables pour stocker les cartons reçus pour chaque combattant
+        let cartonsCombatantRouge = { blanc: 0, jaune: 0, rouge: 0 };
+        let cartonsCombatantVert = { blanc: 0, jaune: 0, rouge: 0 };
 
-    function handlePress(combatant, valeur) {
-        isLongPress = false;
-        pressTimer = setTimeout(() => {
-            isLongPress = true;
-            majScore(combatant, -valeur);
-        }, 1000); // 1 seconde pour un appui long
-    }
 
-    function clearPress(combatant, valeur) {
-        clearTimeout(pressTimer);
-        if (!isLongPress && combatant && valeur) {
-            majScore(combatant, valeur);
+        const socket = io();
+        let pressTimer;
+        let isLongPress = false;
+
+        // Fonction générique pour ajouter ou retirer un carton
+        function updateCarton(combatant, type, action) {
+            // Déterminer quel combattant doit être mis à jour
+            let cartons = (combatant === 'Combatant_Vert') ? cartonsCombatantRouge : cartonsCombatantVert;
+
+            // Ajouter ou retirer le carton en fonction de l'action (increment ou decrement)
+            if (action === 'increment') {
+                if (type === 0) cartons.blanc++;
+                else if (type === 3) cartons.jaune++;
+                else if (type === 5) cartons.rouge++;
+            } else if (action === 'decrement') {
+                if (type === 0 && cartons.blanc > 0) cartons.blanc--;
+                else if (type === 3 && cartons.jaune > 0) cartons.jaune--;
+                else if (type === 5 && cartons.rouge > 0) cartons.rouge--;
+            }
+
+            // Mettre à jour l'affichage des cartons après modification
+            updateCartonsDisplay();
         }
-    }
 
-    function majScore(combatant, valeur) {
-        socket.emit('maj_score', { combatant, valeur });
-    }
 
-    // Gestion de l'appui long pour les cartons
-    function handleCartonPress(combatant, carton) {
-        isLongPress = false;
-        cartonPressTimer = setTimeout(() => {
-            isLongPress = true;
-            majCarton(combatant, carton, -1); // Enlève un carton en cas d'appui long
-        }, 1000);
-    }
+        // Fonction pour mettre à jour l'affichage des cartons
+        function updateCartonsDisplay() {
+            // Mettre à jour l'affichage des cartons pour le Combatant Rouge
+            document.getElementById("cartons_cbt_Rouge").textContent =
+                `Blanc: ${cartonsCombatantRouge.blanc}, Jaune: ${cartonsCombatantRouge.jaune}, Rouge: ${cartonsCombatantRouge.rouge}`;
 
-    function clearCartonPress(combatant, carton) {
-        clearTimeout(cartonPressTimer);
-        if (!isLongPress && combatant && carton) {
-            majCarton(combatant, carton, 1); // Ajoute un carton
+            // Mettre à jour l'affichage des cartons pour le Combatant Vert
+            document.getElementById("cartons_cbt_Vert").textContent =
+                `Blanc: ${cartonsCombatantVert.blanc}, Jaune: ${cartonsCombatantVert.jaune}, Rouge: ${cartonsCombatantVert.rouge}`;
         }
-    }
 
-    function majCarton(combatant, carton, valeur) {
-        socket.emit('maj_carton', { Combatant: combatant, carton: carton, valeur: valeur });
-    }
+        function handlePress(combatant, valeur, action) {
+            isLongPress = false;
 
-       // Écoute les mises à jour de l'affichage des scores et des cartons
-    socket.on('maj_affichage', (data) => {
-        // Vérifie si les données sont bien au format attendu
-        if (data.Combatant_Rouge && data.Combatant_Vert) {
-            // Mise à jour des scores
-            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
+            pressTimer = setTimeout(() => {
+                isLongPress = true;
+
+                if (action === 'increment') {
+                    updateCarton(combatant, valeur, 'increment'); // Ajouter le carton
+                } else if (action === 'decrement') {
+                    updateCarton(combatant, valeur, 'decrement'); // Retirer le carton
+                }
+
+                majScore(combatant, -valeur); // Retirer les points en cas d'appui long
+            }, 1000); // 1000 ms = 1 seconde
+        }
+
+        // Fonction pour annuler l'appui long
+        function clearPress(combatant, valeur, action) {
+            clearTimeout(pressTimer);
+
+            if (!isLongPress && combatant && valeur) {
+                if (action === 'increment') {
+                    updateCarton(combatant, valeur, 'increment'); // Ajouter le carton
+                } else if (action === 'decrement') {
+                    updateCarton(combatant, valeur, 'decrement'); // Retirer le carton
+                }
+
+                majScore(combatant, valeur); // Ajouter les points si ce n'est pas un appui long
+            }
+        }
+
+        // Fonction de mise à jour du score
+        function majScore(combatant, valeur) {
+            socket.emit('maj_score', { combatant, valeur });
+        }
+
+        // Écoute des mises à jour de score
+        socket.on('maj_affichage', (data) => {
             document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
+            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
+        });
 
-            // Mise à jour des cartons
-            document.getElementById('cartonsRouge').innerText = `Blanc: ${data.Combatant_Rouge.cartons_blanc}, Jaune: ${data.Combatant_Rouge.cartons_jaune}, Rouge: ${data.Combatant_Rouge.cartons_rouge}`;
-            document.getElementById('cartonsVert').innerText = `Blanc: ${data.Combatant_Vert.cartons_blanc}, Jaune: ${data.Combatant_Vert.cartons_jaune}, Rouge: ${data.Combatant_Vert.cartons_rouge}`;
-        } else {
-            console.error("Données reçues dans un format inattendu", data);
+        let isTouching = false; // Variable pour vérifier si l'utilisateur touche déjà un bouton
+
+        // Fonction de gestion des événements d'appui sur les boutons (mobile/tablette)
+        function handleTouchStart(event, combatant, valeur, action) {
+            if (isTouching) return; // Si un appui est déjà en cours, on ne fait rien
+            isTouching = true; // Marque que l'utilisateur touche le bouton
+            event.preventDefault(); // Empêche la propagation de l'événement
+
+            // Appel de la fonction pour le démarrage de l'appui long
+            handlePress(combatant, valeur, action);
         }
-    });
+
+        function clearTouch(event, combatant, valeur, action) {
+            isTouching = false; // Réinitialise la variable quand l'utilisateur lève le doigt
+            event.preventDefault(); // Empêche la propagation de l'événement
+
+            // Annule l'appui long et met à jour le score si l'appui court
+            clearPress(combatant, valeur, action);
+        }
+
+        // Gestion des événements d'appui long sur PC (souris)
+        function handleMouseDown(event, combatant, valeur, action) {
+            isLongPress = false;
+
+            pressTimer = setTimeout(() => {
+                isLongPress = true;
+
+                if (action === 'increment') {
+                    updateCarton(combatant, valeur, 'increment'); // Ajouter le carton
+                } else if (action === 'decrement') {
+                    updateCarton(combatant, valeur, 'decrement'); // Retirer le carton
+                }
+
+                majScore(combatant, -valeur); // Retirer les points en cas d'appui long
+            }, 1000); // 1000 ms = 1 seconde
+        }
+
+        function clearMouseUp(event, combatant, valeur, action) {
+            clearTimeout(pressTimer);
+
+            if (!isLongPress && combatant && valeur) {
+                if (action === 'increment') {
+                    updateCarton(combatant, valeur, 'increment'); // Ajouter le carton
+                } else if (action === 'decrement') {
+                    updateCarton(combatant, valeur, 'decrement'); // Retirer le carton
+                }
+
+                majScore(combatant, valeur); // Ajouter les points si ce n'est pas un appui long
+            }
+        }
+
+
+        // Ajout d'événements pour les interactions tactiles et souris
+        // Combatant Rouge
+        document.getElementById("buttonRouge1").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 1));
+        document.getElementById("buttonRouge1").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 1));
+        document.getElementById("buttonRouge1").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 1));
+        document.getElementById("buttonRouge1").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 1));
+
+        document.getElementById("buttonRouge3").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 3));
+        document.getElementById("buttonRouge3").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 3));
+        document.getElementById("buttonRouge3").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 3));
+        document.getElementById("buttonRouge3").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 3));
+
+        document.getElementById("buttonRouge5").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 5));
+        document.getElementById("buttonRouge5").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 5));
+        document.getElementById("buttonRouge5").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 5));
+        document.getElementById("buttonRouge5").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 5));
+
+        // Combatant Vert
+        document.getElementById("buttonVert1").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 1));
+        document.getElementById("buttonVert1").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 1));
+        document.getElementById("buttonVert1").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 1));
+        document.getElementById("buttonVert1").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 1));
+
+        document.getElementById("buttonVert3").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 3));
+        document.getElementById("buttonVert3").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 3));
+        document.getElementById("buttonVert3").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 3));
+        document.getElementById("buttonVert3").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 3));
+
+        document.getElementById("buttonVert5").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 5));
+        document.getElementById("buttonVert5").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 5));
+        document.getElementById("buttonVert5").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 5));
+        document.getElementById("buttonVert5").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 5));
+
+
+        // Fonction pour envoyer l'événement de carton
+        function applyCarton(combatant, carton) {
+            let points = 0;
+
+            // Déterminer les points associés à chaque carton
+            if (carton === 'blanc') {
+                points = 0;  // Carton blanc : 0 points
+            } else if (carton === 'jaune') {
+                points = 3;  // Carton jaune : 3 points
+            } else if (carton === 'rouge') {
+                points = 5;  // Carton rouge : 5 points
+            }
+
+            // Identifier l'adversaire (en fonction du combattant)
+            const adversaire = combatant === 'Combatant_Rouge' ? 'Combatant_Vert' : 'Combatant_Rouge';
+
+            // Émettre l'événement de mise à jour des points pour l'adversaire
+            socket.emit('maj_score', { combatant: adversaire, valeur: points });
+        }
+
+
+                // Gestion des événements d'appui long sur les boutons de carton
+        document.getElementById("cartonBlancRouge").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 0, 'decrement'));
+        document.getElementById("cartonBlancRouge").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 0, 'increment'));
+        document.getElementById("cartonBlancRouge").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 0, 'decrement'));
+        document.getElementById("cartonBlancRouge").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 0, 'increment'));
+
+        document.getElementById("cartonJauneRouge").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 3, 'decrement'));
+        document.getElementById("cartonJauneRouge").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 3, 'increment'));
+        document.getElementById("cartonJauneRouge").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 3, 'decrement'));
+        document.getElementById("cartonJauneRouge").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 3, 'increment'));
+
+        document.getElementById("cartonRougeRouge").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Vert', 5, 'decrement'));
+        document.getElementById("cartonRougeRouge").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Vert', 5, 'increment'));
+        document.getElementById("cartonRougeRouge").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Vert', 5, 'decrement'));
+        document.getElementById("cartonRougeRouge").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Vert', 5, 'increment'));
+
+        // Cartons pour Combatant Vert
+        document.getElementById("cartonBlancVert").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 0, 'decrement'));
+        document.getElementById("cartonBlancVert").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 0, 'increment'));
+        document.getElementById("cartonBlancVert").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 0, 'decrement'));
+        document.getElementById("cartonBlancVert").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 0, 'increment'));
+
+        document.getElementById("cartonJauneVert").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 3, 'decrement'));
+        document.getElementById("cartonJauneVert").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 3, 'increment'));
+        document.getElementById("cartonJauneVert").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 3, 'decrement'));
+        document.getElementById("cartonJauneVert").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 3, 'increment'));
+
+        document.getElementById("cartonRougeVert").addEventListener("touchstart", (event) => handleTouchStart(event, 'Combatant_Rouge', 5, 'decrement'));
+        document.getElementById("cartonRougeVert").addEventListener("touchend", (event) => clearTouch(event, 'Combatant_Rouge', 5, 'increment'));
+        document.getElementById("cartonRougeVert").addEventListener("mousedown", (event) => handleMouseDown(event, 'Combatant_Rouge', 5, 'decrement'));
+        document.getElementById("cartonRougeVert").addEventListener("mouseup", (event) => clearMouseUp(event, 'Combatant_Rouge', 5, 'increment'));
+
+
+
+
     </script>
 </body>
 </html>
