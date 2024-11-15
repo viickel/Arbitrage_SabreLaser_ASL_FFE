@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
+{% extends 'base.html' %}
+
+{% block head %}
     <title>Affichage des Scores</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <h1>Scores en Direct</h1>
     <div>
         <h2>Combatant Rouge : <span id="scoreRouge">0</span></h2>
@@ -21,5 +21,4 @@
         });
 
     </script>
-</body>
-</html>
+{% endblock %}

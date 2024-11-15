@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
+{% extends 'base.html' %}
+
+{% block head %}
     <title>Bandeau Transparent</title>
+    <!-- mettre dans une feuille de style dédiée -->
     <style>
         body {
             background-color: Transparent;
@@ -11,12 +11,14 @@
         }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
-</head>
-<body>
+{% endblock %}
+
+{% block body %}
     <div>
         Combatant Rouge : <span id="scoreRouge">0</span> - Combatant Vert : <span id="scoreVert">0</span>
     </div>
 
+    <!-- mettre dans un fichier js dédié -->
     <script>
         const socket = io();
 
@@ -25,5 +27,4 @@
             document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
         });
     </script>
-</body>
-</html>
+{% endblock %}
