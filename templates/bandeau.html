@@ -15,7 +15,7 @@
 
 {% block body %}
     <div>
-        Combatant Rouge : <span id="scoreRouge">0</span> - Combatant Vert : <span id="scoreVert">0</span>
+        Combattant Rouge : <span id="scoreRouge">0</span> - Combattant Vert : <span id="scoreVert">0</span>
     </div>
 
     <!-- mettre dans un fichier js dédié -->
@@ -23,8 +23,8 @@
         const socket = io();
 
         socket.on('maj_affichage', (data) => {
-            document.getElementById('scoreRouge').innerText = data.Combatant_Rouge.score;
-            document.getElementById('scoreVert').innerText = data.Combatant_Vert.score;
+            document.getElementById('scoreRouge').innerText = data.combattant_Rouge.score;
+            document.getElementById('scoreVert').innerText = data.combattant_Vert.score;
         });
     </script>
 {% endblock %}

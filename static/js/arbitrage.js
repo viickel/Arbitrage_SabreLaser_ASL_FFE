@@ -1,8 +1,8 @@
 // Fonction de mise à jour du score sur l'interface
-function majScoreDisplay(combatant, score) {
-    if (combatant === 'Vert') {
+function majScoreDisplay(combattant, score) {
+    if (combattant === 'Vert') {
         document.getElementById('scoreVert').textContent = score;
-    } else if (combatant === 'Rouge') {
+    } else if (combattant === 'Rouge') {
         document.getElementById('scoreRouge').textContent = score;
     }
 }
@@ -11,13 +11,13 @@ const socket = io();
 const num_arene = "{{ num_arene }}";
 
 // Envoi de la mise à jour au serveur
-function majScore(combatant, valeur) {
-    socket.emit('maj_score', { combatant, valeur });
+function majScore(combattant, valeur) {
+    socket.emit('maj_score', { combattant, valeur });
 }
 
 // Mise à jour depuis le serveur
 socket.on('score_updated', function(data) {
-    majScoreDisplay(data.combatant, data.score);
+    majScoreDisplay(data.combattant, data.score);
 });
 
 // Variables et boutons pour la détection d'appui court/long
