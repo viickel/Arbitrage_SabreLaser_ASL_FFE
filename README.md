@@ -1,9 +1,10 @@
 # Application d'arbitrage sabre laser
-Cette application est developper dans un environement python avec Flask, le but est dans un premier temps de créer une interface d'arbitrage au sabre laser avec des pages structutrer comme ceci 
-+ Page arbitrage : Permet de rentrés les scores du match en cours et de gérer un chronometre
-+ Page Affichage : Affichage des score et du chrono sur une tv connecter via le navigateur en reseau local
-+ Bandeau : Une page web pour integrer un bandeau avec le scrore et le nom des combatant sur un live par exemple avec OBS
-+ Config : une page de config pour configurer les nom des combatant sur les arene a distance
+Cette application web est developpée dans un environnement python avec Flask. Son but est dans un premier temps de créer une interface d'arbitrage au sabre laser.
+La structure des pages est la suivante :
++ Page arbitrage : Permet la saisie des scores du match en cours et la gestion d'un chronomètre
++ Page affichage : Affichage des scores et du chronomètre sur une TV connectée via navigateur en réseau local
++ Bandeau : Page web spécifique pour l'integration d'un bandeau (en live par exemple via OBS) avec le score et le nom des combattants
++ Config : Page de configuration pour paramétrer les noms des combatants sur les arènes à distance
 
-
-L'application doit pour le moment fonctionner de maniere indépendante, par exemple la modification du nom des combatant se ferais dans la page de config, par contre dans les dictionnaire de donné je prévois deja des variable comme le numero de licencen pour relier a une base de donnée ou bien les points quest pour enregistrer les match.
+L'application doit pour le moment fonctionner de manière indépendante. Par exemple, la modification du nom des combattant se ferait dans la page de configuration.
+Par contre, dans les dictionnaires de données je prévois déjà des variables comme le numero de licence pour relier à une base de données ou bien les points quest pour enregistrer les match.
