@@ -11,16 +11,16 @@ combattant_rouge = Combattant("Atom")
 combattant_vert = Combattant("Zeus")
 arena = Arene(1, combattant_rouge, combattant_vert)
 
-@app.route('/affichage/<string:num>')
-def affichage(num: str):
+@app.route('/affichage/<int:num>')
+def affichage(num):
     return render_template('affichage.html', arene=arena)
 
-@app.route('/bandeau/<string:num>')
-def bandeau(num: str):
+@app.route('/bandeau/<int:num>')
+def bandeau(num):
     return render_template('bandeau.html', arene=arena)
 
-@app.route('/Arene/<string:num>')
-def arene(num: str):
+@app.route('/Arene/<int:num>')
+def arene(num):
     return render_template('arbitrage.html', arene=arena)
 
 ################### Routes pour l'arbitrage ###################
