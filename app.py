@@ -33,8 +33,14 @@ def incrementScore(combattant, valeur):
 @app.route('/increment-carton/<combattant>/<couleur>', methods=['POST'])
 def incrementCarton(combattant, couleur):
     # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
+    
+    # on ajoute un carton
     arena.cartons[combattant][couleur] += 1
-    return jsonify(cartons=arena.cartons)
+    # pour les cartons au-dessus du blanc, le score change
+    if couleur != "blanc":
+        adversaire = "vert" if combattant == "rouge" else "rouge"
+        arena.score[adversaire] += 3
+    return jsonify(cartons=arena.cartons, score=arena.score)
 
 
 ################### Routes pour l'affichage ###################

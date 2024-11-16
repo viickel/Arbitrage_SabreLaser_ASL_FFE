@@ -14,6 +14,8 @@ $(document).ready(function() {
 
         $.post(`/increment-carton/${color}/${value}`, function(data) {
             $(`#cbt_${color}_carton_${value}`).text(data.cartons[color][value]);
+            $(`#score_rouge`).text(data.score["rouge"]);
+            $(`#score_vert`).text(data.score["vert"]);
         });
     });
 });
