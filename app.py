@@ -23,6 +23,12 @@ def bandeau(num: str):
 def arene(num: str):
     return render_template('arbitrage.html', arene=arena)
 
+################### Routes pour l'arbitrage ###################
+@app.route('/increment/<couleur>/<int:valeur>', methods=['POST'])
+def increment(couleur, valeur):
+    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
+    arena.score[couleur] += valeur
+    return jsonify(score=arena.score)
 
 
 if __name__ == '__main__':

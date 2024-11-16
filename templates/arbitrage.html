@@ -16,30 +16,28 @@
 		<table>          
 			<tr> 
 				<td style="padding-right: 75px;">
-					<center><h1> {{ arene.combattants['rouge'].nom }}</h1> </center>
+					<center><h1>{{ arene.combattants['rouge'].nom }}</h1> </center>
 				</td> 
 				<td>
-					<center> <h1> {{ arene.combattants['vert'].nom}} </h1></center>
+					<center> <h1>{{ arene.combattants['vert'].nom}}</h1></center>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="score-cell score-rouge"> 
-					<p>
-						<center><h1 id="scoreRouge"> {{ arene.score['rouge'] }} </h1>
-						</p>
-					<button id="buttonRouge1"> 1 point </button>
-					<button id="buttonRouge3"> 3 points </button>
-					<button id="buttonRouge5"> 5 points </button>
+					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>
+					<button class="increment-score" data-color="rouge" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="rouge" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="rouge" data-value="5"> +5 point </button>
 					
 					</center> <!-- à enlever -->
 				</td> 
 
 				<td class="score-cell score-vert"> 
-					<p><center><h1 id="scoreVert"> {{ arene.score['vert'] }} </h1></p>
-					<button id="buttonVert1"> 1 point </button>
-					<button id="buttonVert3"> 3 points </button>
-					<button id="buttonVert5"> 5 points </button>
+					<p><center><h1 id="score_vert">{{ arene.score['vert'] }}</h1></p>
+					<button class="increment-score" data-color="vert" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="vert" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="vert" data-value="5"> +5 point </button>
 
 					</center> <!-- à enlever -->
 				</td>
@@ -47,7 +45,7 @@
 		
 			<tr>
 				<td><center>
-					<p>Cartons:<span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['rouge']['blanc'] }}, Jaune: {{ arene.cartons['rouge']['jaune'] }}, Rouge: {{ arene.cartons['rouge']['rouge'] }}</span> </p>
+					<p>Cartons: <span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['rouge']['blanc'] }}, Jaune: {{ arene.cartons['rouge']['jaune'] }}, Rouge: {{ arene.cartons['rouge']['rouge'] }}</span> </p>
 					<button id="cartonBlancRouge">Carton Blanc</button>
 					<button id="cartonJauneRouge">Carton Jaune</button>
 					<button id="cartonRougeRouge">Carton Rouge</button>
@@ -56,7 +54,7 @@
 				</td>
 
 				<td><center>
-					<p>Cartons:<span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['vert']['blanc'] }}, Jaune: {{ arene.cartons['vert']['jaune'] }}, Rouge: {{ arene.cartons['vert']['rouge'] }}</span> </p>
+					<p>Cartons: <span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['vert']['blanc'] }}, Jaune: {{ arene.cartons['vert']['jaune'] }}, Rouge: {{ arene.cartons['vert']['rouge'] }}</span> </p>
 					<button id="cartonBlancVert">Carton Blanc</button>
 					<button id="cartonJauneVert">Carton Jaune</button>
 					<button id="cartonRougeVert">Carton Rouge</button>
