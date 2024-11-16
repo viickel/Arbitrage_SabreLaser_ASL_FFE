@@ -2,11 +2,11 @@
 
 class Arene(object):
 	"""docstring for Arene"""
-	def __init__(self, arg):
+	def __init__(self, combattant_rouge, combattant_vert):
 		super(Arene, self).__init__()
 		self.combattants = {
-			"rouge":
-			"vert":
+			"rouge":combattant_rouge
+			"vert":combattant_vert
 		}
 		self.score = {
 			"rouge":0
