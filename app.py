@@ -36,6 +36,13 @@ def incrementCarton(combattant, couleur):
     arena.cartons[combattant][couleur] += 1
     return jsonify(cartons=arena.cartons)
 
+
+################### Routes pour l'affichage ###################
+@app.route('/score/<int:num>', methods=['POST'])
+def score(num):
+    # TODO : utiliser num pour changer d'arène
+    return jsonify(score=arena.score)
+
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000
     app.run(debug=True)
