@@ -25,10 +25,10 @@ class Arene(object):
 				"rouge":0
 			}
 		}
+		self.historique = []
 		# TODO
 		# self.chrono
 		# self.statut = "en attente"
-		# self.historique = []
 
 		
 	def ajouterCarton(self, combattant, couleur):

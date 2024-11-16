@@ -2,7 +2,6 @@
 
 {% block head %}
 	<title>Interface d'Arbitrage</title>
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>     -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
 	<script src="{{ url_for('static', filename='js/arbitrage.js') }}"></script>
@@ -64,5 +63,18 @@
 			</tr>
 		</table>
 		</center> <!-- à enlever -->
-	</div>	
+	</div>
+
+	<div class="historique">
+		<div class="annuler">
+			<button>Annuler la dernière action</button>
+		</div>
+		<div id=liste_historique>
+			{% for ligne in arene.historique[::-1] %}
+				<div class="ligne_historique_{{ligne[1]}}">
+					[{{ ligne[0] }}] {{ ligne[1] }}: {{ ligne[2] }} {{ ligne[3] }}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
