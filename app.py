@@ -24,12 +24,17 @@ def arene(num: str):
     return render_template('arbitrage.html', arene=arena)
 
 ################### Routes pour l'arbitrage ###################
-@app.route('/increment/<couleur>/<int:valeur>', methods=['POST'])
-def increment(couleur, valeur):
+@app.route('/increment-score/<combattant>/<int:valeur>', methods=['POST'])
+def incrementScore(combattant, valeur):
     # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    arena.score[couleur] += valeur
+    arena.score[combattant] += valeur
     return jsonify(score=arena.score)
 
+@app.route('/increment-carton/<combattant>/<couleur>', methods=['POST'])
+def incrementCarton(combattant, couleur):
+    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
+    arena.cartons[combattant][couleur] += 1
+    return jsonify(cartons=arena.cartons)
 
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000

@@ -3,8 +3,17 @@ $(document).ready(function() {
         const color = $(this).data('color');
         const value = $(this).data('value');
 
-        $.post(`/increment/${color}/${value}`, function(data) {
+        $.post(`/increment-score/${color}/${value}`, function(data) {
             $(`#score_${color}`).text(data.score[color]);
+        });
+    });
+
+    $('.increment-carton').click(function() {
+        const color = $(this).data('color');
+        const value = $(this).data('value');
+
+        $.post(`/increment-carton/${color}/${value}`, function(data) {
+            $(`#cbt_${color}_carton_${value}`).text(data.cartons[color][value]);
         });
     });
 });

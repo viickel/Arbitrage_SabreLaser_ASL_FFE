@@ -45,19 +45,19 @@
 		
 			<tr>
 				<td><center>
-					<p>Cartons: <span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['rouge']['blanc'] }}, Jaune: {{ arene.cartons['rouge']['jaune'] }}, Rouge: {{ arene.cartons['rouge']['rouge'] }}</span> </p>
-					<button id="cartonBlancRouge">Carton Blanc</button>
-					<button id="cartonJauneRouge">Carton Jaune</button>
-					<button id="cartonRougeRouge">Carton Rouge</button>
+					<p>Cartons: Blanc: <span id="cbt_rouge_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_rouge_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_rouge_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+					<button class="increment-carton" data-color="rouge" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="rouge" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="rouge" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
 
 				<td><center>
-					<p>Cartons: <span id="cartons_cbt_Rouge">Blanc: {{ arene.cartons['vert']['blanc'] }}, Jaune: {{ arene.cartons['vert']['jaune'] }}, Rouge: {{ arene.cartons['vert']['rouge'] }}</span> </p>
-					<button id="cartonBlancVert">Carton Blanc</button>
-					<button id="cartonJauneVert">Carton Jaune</button>
-					<button id="cartonRougeVert">Carton Rouge</button>
+					<p>Cartons: Blanc: <span id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+					<button class="increment-carton" data-color="vert" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="vert" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="vert" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
