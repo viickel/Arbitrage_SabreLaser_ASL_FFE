@@ -72,7 +72,7 @@
 		</div>
 		<div id=liste_historique>
 			{% for ligne in arene.historique[::-1] %}
-				<div class="ligne_historique_{{ligne[1]}}">
+				<div class="ligne_historique {{ligne[1]}}">
 					[{{ ligne[0] }}] {{ ligne[1] }}: {{ ligne[2] }} {{ ligne[3] }}
 				</div>
 			{% endfor %}

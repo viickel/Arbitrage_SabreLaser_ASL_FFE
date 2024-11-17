@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from datetime import datetime
 
 from models import *
 
@@ -27,41 +26,24 @@ def arene(num):
 @app.route('/increment-score/<combattant>/<int:valeur>', methods=['POST'])
 def incrementScore(combattant, valeur):
     # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    arena.score[combattant] += valeur
-
-    # on garde un historique des actions effectuées
-    t = datetime.now().time()
-    timestamp = f"{t.hour}:{t.minute}:{t.second:02}"
-    arena.historique.append((timestamp, combattant, valeur, "point(s)"))
+    arena.incrementerScore(combattant, valeur)
     last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
     return jsonify(score=arena.score, last_action=last_action)
 
 @app.route('/increment-carton/<combattant>/<couleur>', methods=['POST'])
 def incrementCarton(combattant, couleur):
     # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    
-    # on ajoute un carton
-    arena.cartons[combattant][couleur] += 1
-    # pour les cartons au-dessus du blanc, le score change
-    if couleur != "blanc":
-        adversaire = "vert" if combattant == "rouge" else "rouge"
-       
-        if couleur == "rouge":
-            arena.score[adversaire] += 5 #ajout de 5 point sur carton rouge
-        else : 
-            arena.score[adversaire] += 3 #ajout de 3 points sur carton jaune 
-
-
-    # on garde un historique des actions effectuées
-    t = datetime.now().time()
-    timestamp = f"{t.hour}:{t.minute}:{t.second}"
-    arena.historique.append((timestamp, combattant, "carton", couleur))
+    arena.ajouterCarton(combattant, couleur)
     last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
     return jsonify(cartons=arena.cartons, score=arena.score, last_action=last_action)
 
-@app.route('/annuler', methods=['POST'])
-def annulerAction():
-    pass
+@app.route('/annuler/<int:num_arene>', methods=['POST'])
+def annulerAction(num_arene):
+    if len(arena.historique) == 0:
+        return jsonify(cartons=arena.cartons, score=arena.score)
+    
+    arena.annulerDerniereAction()
+    return jsonify(cartons=arena.cartons, score=arena.score)
 
 ################### Routes pour l'affichage ###################
 @app.route('/score/<int:num>', methods=['POST'])
