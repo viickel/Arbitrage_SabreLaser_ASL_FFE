@@ -9,36 +9,34 @@
 
 {% block body %}
 <center>
-	<h1>Arene {{ num_arene }} </h1>
+	<h1>Arene #{{ arene.numero }} </h1>
 
 	<div>   
 		<table>          
 			<tr> 
 				<td style="padding-right: 75px;">
-					<center><h1> {{combattant.Rouge.nom}}</h1> </center>
+					<center><h1>{{ arene.combattants['rouge'].nom }}</h1> </center>
 				</td> 
 				<td>
-					<center> <h1> {{combattant.Vert.nom}} </h1></center>
+					<center> <h1>{{ arene.combattants['vert'].nom}}</h1></center>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="score-cell score-rouge"> 
-					<p>
-						<center><h1 id="scoreRouge"> {{combattant.Rouge.score}} </h1>
-						</p>
-					<button id="buttonRouge1"> 1 point </button>
-					<button id="buttonRouge3"> 3 points </button>
-					<button id="buttonRouge5"> 5 points </button>
+					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>
+					<button class="increment-score" data-color="rouge" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="rouge" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="rouge" data-value="5"> +5 point </button>
 					
 					</center> <!-- à enlever -->
 				</td> 
 
 				<td class="score-cell score-vert"> 
-					<p><center><h1 id="scoreVert"> {{combattant.Vert.score}} </h1></p>
-					<button id="buttonVert1"> 1 point </button>
-					<button id="buttonVert3"> 3 points </button>
-					<button id="buttonVert5"> 5 points </button>
+					<p><center><h1 id="score_vert">{{ arene.score['vert'] }}</h1></p>
+					<button class="increment-score" data-color="vert" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="vert" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="vert" data-value="5"> +5 point </button>
 
 					</center> <!-- à enlever -->
 				</td>
@@ -46,24 +44,37 @@
 		
 			<tr>
 				<td><center>
-					<p>Cartons:<span id="cartons_cbt_Rouge">Blanc: {{combattant.Rouge.cartons_blanc}}, Jaune: {{combattant.Rouge.cartons_jaune}}, Rouge: {{combattant.Rouge.cartons_rouge}}</span> </p>
-					<button id="cartonBlancRouge">Carton Blanc</button>
-					<button id="cartonJauneRouge">Carton Jaune</button>
-					<button id="cartonRougeRouge">Carton Rouge</button>
+					<p>Cartons: Blanc: <span id="cbt_rouge_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_rouge_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_rouge_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+					<button class="increment-carton" data-color="rouge" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="rouge" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="rouge" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
 
 				<td><center>
-					<p>Cartons : <span id="cartons_cbt_Vert">Blanc: {{combattant.Vert.cartons_blanc}}, Jaune: {{combattant.Vert.cartons_jaune}}, Rouge: {{combattant.Vert.cartons_rouge}}</span> </p>
-					<button id="cartonBlancVert">Carton Blanc</button>
-					<button id="cartonJauneVert">Carton Jaune</button>
-					<button id="cartonRougeVert">Carton Rouge</button>
+					<p>Cartons: Blanc: <span id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+					<button class="increment-carton" data-color="vert" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="vert" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="vert" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
 			</tr>
 		</table>
 		</center> <!-- à enlever -->
-	</div>	
+	</div>
+
+	<div class="historique">
+		<div class="annuler">
+			<button>Annuler la dernière action</button>
+		</div>
+		<div id=liste_historique>
+			{% for ligne in arene.historique[::-1] %}
+				<div class="ligne_historique {{ligne[1]}}">
+					[{{ ligne[0] }}] {{ ligne[1] }}: {{ ligne[2] }} {{ ligne[3] }}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}
