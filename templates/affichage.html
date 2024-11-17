@@ -2,7 +2,9 @@
 
 {% block head %}
     <title>Affichage des Scores</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
+    <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
 {% endblock %}
 
 {% block body %}
