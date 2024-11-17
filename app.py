@@ -31,7 +31,7 @@ def incrementScore(combattant, valeur):
 
     # on garde un historique des actions effectuées
     t = datetime.now().time()
-    timestamp = f"{t.hour}:{t.minute}:{t.second:02}"
+    timestamp = f"{t.hour}h{t.minute}:{t.second:02}"
     arena.historique.append((timestamp, combattant, valeur, "point(s)"))
     last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
     return jsonify(score=arena.score, last_action=last_action)
@@ -54,9 +54,30 @@ def incrementCarton(combattant, couleur):
     last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
     return jsonify(cartons=arena.cartons, score=arena.score, last_action=last_action)
 
-@app.route('/annuler', methods=['POST'])
-def annulerAction():
-    pass
+@app.route('/annuler/<int:num_arene>', methods=['POST'])
+def annulerAction(num_arene):
+    if len(arena.historique) == 0:
+        return jsonify(cartons=arena.cartons, score=arena.score)
+    
+    last_action = arena.historique[-1]
+    if last_action[2] == "carton":
+        # Dans le cas d'un carton, il faut enlever le carton
+        # et baisser le score de l'adversaire si ce n'est pas
+        # un carton blanc
+        _, combattant, _, couleur = last_action
+        arena.cartons[combattant][couleur] -= 1
+        if couleur != "blanc":
+            adversaire = "vert" if combattant == "rouge" else "rouge"
+            arena.score[adversaire] -= 3
+        arena.historique.pop(-1)
+    elif last_action[3] == "point(s)":
+        # Dans le cas d'un ajout de point
+        # on diminue simplement le score de la valeur
+        _, combattant, valeur, _ = last_action
+        arena.score[combattant] -= valeur
+        arena.historique.pop(-1)
+
+    return jsonify(cartons=arena.cartons, score=arena.score)
 
 ################### Routes pour l'affichage ###################
 @app.route('/score/<int:num>', methods=['POST'])
