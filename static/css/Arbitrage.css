@@ -73,3 +73,30 @@ button {
     color: white;
     border: 2px solid crimson;
 }
+
+/* Gestion de l'historique */
+.historique {
+    font-size: 20px;
+    color: white;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+.ligne_historique.rouge {
+    text-align: center;
+    background-color: rgb(165, 23, 23);
+    padding: 5px;
+}
+
+.ligne_historique.vert {
+    text-align: center;
+    background-color: rgb(22, 93, 22);
+    padding: 5px;
+}
+
+.annuler {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}

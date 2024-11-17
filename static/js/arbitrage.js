@@ -1,46 +1,43 @@
-// Fonction de mise à jour du score sur l'interface
-function majScoreDisplay(combattant, score) {
-    if (combattant === 'Vert') {
-        document.getElementById('scoreVert').textContent = score;
-    } else if (combattant === 'Rouge') {
-        document.getElementById('scoreRouge').textContent = score;
+$(document).ready(function() {
+    $('.increment-score').click(function() {
+        const color = $(this).data('color');
+        const value = $(this).data('value');
+
+        $.post(`/increment-score/${color}/${value}`, function(data) {
+            $(`#score_${color}`).text(data.score[color]);
+            addHistoryLine(color, data.last_action)
+        });
+    });
+
+    $('.increment-carton').click(function() {
+        const color = $(this).data('color');
+        const value = $(this).data('value');
+
+        $.post(`/increment-carton/${color}/${value}`, function(data) {
+            $(`#cbt_${color}_carton_${value}`).text(data.cartons[color][value]);
+            $(`#score_rouge`).text(data.score["rouge"]);
+            $(`#score_vert`).text(data.score["vert"]);
+            addHistoryLine(color, data.last_action)
+        });
+    });
+
+    $('.annuler').click(function() {
+        $.post(`/annuler/1`, function(data) {
+            $(`#cbt_rouge_carton_blanc`).text(data.cartons["rouge"]["blanc"]);
+            $(`#cbt_rouge_carton_jaune`).text(data.cartons["rouge"]["jaune"]);
+            $(`#cbt_rouge_carton_rouge`).text(data.cartons["rouge"]["rouge"]);
+            $(`#cbt_vert_carton_blanc`).text(data.cartons["vert"]["blanc"]);
+            $(`#cbt_vert_carton_jaune`).text(data.cartons["vert"]["jaune"]);
+            $(`#cbt_vert_carton_rouge`).text(data.cartons["vert"]["rouge"]);
+
+            $(`#score_rouge`).text(data.score["rouge"]);
+            $(`#score_vert`).text(data.score["vert"]);
+            $('#liste_historique .ligne_historique:first').remove();
+        });
+    });
+
+    function addHistoryLine(color, line) {
+        const html_line = `<div class="ligne_historique ${color}">${line}</div>`;
+        $('#liste_historique').prepend(html_line);
     }
-}
-
-const socket = io();
-const num_arene = "{{ num_arene }}";
-
-// Envoi de la mise à jour au serveur
-function majScore(combattant, valeur) {
-    socket.emit('maj_score', { combattant, valeur });
-}
-
-// Mise à jour depuis le serveur
-socket.on('score_updated', function(data) {
-    majScoreDisplay(data.combattant, data.score);
-});
-
-// Variables et boutons pour la détection d'appui court/long
-const btn1ptvert = document.getElementById('buttonVert1');
-let pressTimer;
-
-// Appui court - ajouter 1 point
-btn1ptvert.addEventListener('click', function () {
-    majScore('Vert', 1);
-});
-
-// Appui long - retirer 1 point
-btn1ptvert.addEventListener('mousedown', function () {
-    pressTimer = setTimeout(function() {
-        majScore('Vert', -1);
-    }, 800); // 800 ms pour détecter un appui long
-});
-
-// Annuler l'appui long si le bouton est relâché ou si la souris quitte le bouton
-btn1ptvert.addEventListener('mouseup', function() {
-    clearTimeout(pressTimer);
-});
-
-btn1ptvert.addEventListener('mouseleave', function() {
-    clearTimeout(pressTimer);
 });

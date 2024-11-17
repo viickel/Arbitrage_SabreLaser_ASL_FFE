@@ -8,3 +8,22 @@ La structure des pages est la suivante :
 
 L'application doit pour le moment fonctionner de manière indépendante. Par exemple, la modification du nom des combattant se ferait dans la page de configuration.
 Par contre, dans les dictionnaires de données je prévois déjà des variables comme le numero de licence pour relier à une base de données ou bien les points quest pour enregistrer les match.
+
+## Structures de données
+Les objets manipulés par l'interface web sont les arènes et les combattants.
+Ces objets python possèdent les attributs et méthodes suivants :
+
+### Arène
+- numero
+- combattants
+- score
+- cartons
+- historique
+- ajouterCarton(combattant, couleur)
+- incrementerScore(combattant, increment)
+- annulerDerniereAction
+
+### Combattant
+- nom
+- license
+- points_quest

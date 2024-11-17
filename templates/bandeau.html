@@ -2,29 +2,12 @@
 
 {% block head %}
     <title>Bandeau Transparent</title>
-    <!-- mettre dans une feuille de style dédiée -->
-    <style>
-        body {
-            background-color: Transparent;
-            color: black;
-            font-size: 2em;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
 {% endblock %}
 
 {% block body %}
     <div>
-        Combattant Rouge : <span id="scoreRouge">0</span> - Combattant Vert : <span id="scoreVert">0</span>
+        Combattant Rouge : <span id="score_rouge">{{ arene.score['rouge'] }}</span> - Combattant Vert : <span id="score_vert">{{ arene.score['vert'] }}</span>
     </div>
-
-    <!-- mettre dans un fichier js dédié -->
-    <script>
-        const socket = io();
-
-        socket.on('maj_affichage', (data) => {
-            document.getElementById('scoreRouge').innerText = data.combattant_Rouge.score;
-            document.getElementById('scoreVert').innerText = data.combattant_Vert.score;
-        });
-    </script>
 {% endblock %}
