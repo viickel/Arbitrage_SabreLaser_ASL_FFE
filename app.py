@@ -45,7 +45,12 @@ def incrementCarton(combattant, couleur):
     # pour les cartons au-dessus du blanc, le score change
     if couleur != "blanc":
         adversaire = "vert" if combattant == "rouge" else "rouge"
-        arena.score[adversaire] += 3
+       
+        if couleur == "rouge":
+            arena.score[adversaire] += 5 #ajout de 5 point sur carton rouge
+        else : 
+            arena.score[adversaire] += 3 #ajout de 3 points sur carton jaune 
+
 
     # on garde un historique des actions effectuées
     t = datetime.now().time()
@@ -66,4 +71,4 @@ def score(num):
 
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0', port=5000)
