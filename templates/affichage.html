@@ -3,13 +3,53 @@
 {% block head %}
     <title>Affichage des Scores</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Arbitrage.css') }}">
     <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
 {% endblock %}
 
+{% block body_class %}affichage{% endblock %}
 {% block body %}
-    <h1>[Arène #{{ arene.numero }}] Scores en Direct</h1>
-    <div>
-        <h2>Combattant Rouge : <span id="score_rouge">{{ arene.score['rouge'] }}</span></h2>
-        <h2>Combattant Vert : <span id="score_vert">{{ arene.score['vert'] }}</span></h2>
+<center> <h1>Arene #{{ arene.numero }} </h1> </center>
+
+	<div>   
+		<table>          
+			<tr> 
+				<td style="padding-right: 75px;">
+					<center><h1>{{ arene.combattants['rouge'].nom }}</h1> </center>
+				</td> 
+				<td>
+					<center> <h1>{{ arene.combattants['vert'].nom}}</h1></center>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="score-cell score-rouge"> 
+					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>
+				
+					</center> <!-- à enlever -->
+				</td> 
+
+				<td class="score-cell score-vert"> 
+					<p><center><h1 id="score_vert">{{ arene.score['vert'] }}</h1></p>
+			
+					</center> <!-- à enlever -->
+				</td>
+			</tr>
+		
+			<tr>
+				<td><center>
+					<p>Cartons: Blanc: <span id="cbt_rouge_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_rouge_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_rouge_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+			
+					</center> <!-- à enlever -->
+				</td>
+
+				<td><center>
+					<p>Cartons: Blanc: <span id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
+				
+					</center> <!-- à enlever -->
+				</td>
+			</tr>
+		</table>
+		</center> <!-- à enlever -->
     </div>
 {% endblock %}

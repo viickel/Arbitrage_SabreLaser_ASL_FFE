@@ -12,18 +12,28 @@ body {
     background-color: #5a595c; /* Gris clair */
 }
 
-h1 {
+body.arbitrage h1 {
     font-size: 30px;  /* Taille de police des titres */
     color: white;
 }
 
-p {
+body.affichage h1 {
+    font-size: 50px;  /* Taille de police des titres */
+    color: white;
+}
+
+body.arbitrage p {
     font-size: 20px;  /* Taille de police des paragraphes */
     color: white;
 }
 
+body.affichage p {
+    font-size: 40px;  /* Taille de police des paragraphes */
+    color: white;
+}
+
 /* Boutons généraux */
-button {
+body.arbitrage button {
     font-size: 26px;
     padding: 0 25px;
     background-color: rgb(176, 176, 176);
