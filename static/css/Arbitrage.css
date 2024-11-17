@@ -24,8 +24,8 @@ p {
 
 /* Boutons généraux */
 button {
-    font-size: 20px;
-    padding: 0 15px;
+    font-size: 26px;
+    padding: 0 25px;
     background-color: rgb(176, 176, 176);
     color: black;
     border: 2px solid rgb(94, 94, 94);
@@ -56,19 +56,19 @@ button {
 }
 
 /* Couleurs spécifiques des boutons de carton */
-#cartonBlancRouge, #cartonBlancVert {
+#cbt_rouge_carton_blanc, #cbt_vert_carton_blanc {
     background-color: white;
     color: black;
     border: 2px solid gray;
 }
 
-#cartonJauneRouge, #cartonJauneVert {
+#cbt_rouge_carton_jaune, #cbt_vert_carton_jaune {
     background-color: yellow;
     color: black;
     border: 2px solid goldenrod;
 }
 
-#cartonRougeRouge, #cartonRougeVert {
+#cbt_rouge_carton_rouge, #cbt_vert_carton_rouge {
     background-color: darkred;
     color: white;
     border: 2px solid crimson;
