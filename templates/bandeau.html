@@ -3,11 +3,24 @@
 {% block head %}
     <title>Bandeau Transparent</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bandeau.css') }}">
     <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
+    
 {% endblock %}
 
 {% block body %}
-    <div>
-        Combattant Rouge : <span id="score_rouge">{{ arene.score['rouge'] }}</span> - Combattant Vert : <span id="score_vert">{{ arene.score['vert'] }}</span>
+<div class="score-banner">
+    <div class="score-section rouge">
+        <h2 class="name">{{ arene.combattants['rouge'].nom }}</h2>
+        <p class="score"><span id="score_rouge">{{ arene.score['rouge'] }}</span></p>
     </div>
+    <div class="timer-section">
+        <h2>Timer</h2>
+        <p id="timer">00:00</p>
+    </div>
+    <div class="score-section vert">
+        <h2 class="name">{{ arene.combattants['vert'].nom }}</h2>
+        <p class="score"><span id="score_vert">{{ arene.score['vert'] }}</span></p>
+    </div>
+</div>
 {% endblock %}
