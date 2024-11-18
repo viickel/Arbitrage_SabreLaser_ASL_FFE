@@ -19,6 +19,7 @@ body {
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 100; /* Toujours au-dessus */
+    border-radius: 10px; /* Coins arrondis */
 }
 
 /* Section des scores */

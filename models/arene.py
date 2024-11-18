@@ -37,7 +37,11 @@ class Arene(object):
 		# pour les cartons au-dessus du blanc, le score change
 		if couleur != "blanc":
 			adversaire = "vert" if combattant == "rouge" else "rouge"
-			self.score[adversaire] += 3
+			if couleur == "rouge" :
+				self.score[adversaire] += 5 
+			else : 
+				self.score[adversaire] += 3
+
 
 		# on garde un historique des actions effectuées
 		t = datetime.now().time()
