@@ -40,4 +40,75 @@ $(document).ready(function() {
         const html_line = `<div class="ligne_historique ${color}">${line}</div>`;
         $('#liste_historique').prepend(html_line);
     }
+
+
+    let timerDuration = 210; // in seconds
+    let timeLeft = timerDuration;
+    let timerInterval;
+    let isRunning = false;
+
+    const timerDisplay = document.getElementById('timer-display');
+    const playBtn = document.getElementById('play-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    const plusBtn = document.getElementById('plus-btn');
+    const minusBtn = document.getElementById('minus-btn');
+
+    function updateTimerDisplay() {
+        let minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+        let seconds = (timeLeft % 60).toString().padStart(2, '0');
+        timerDisplay.textContent = `${minutes}:${seconds}`;
+
+        // Enable or disable the clickable button based on timeLeft
+        plusBtn.disabled = isRunning == true;
+        minusBtn.disabled = isRunning == true;
+    }
+
+    function startTimer() {
+        if (!isRunning) {
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    isRunning = false;
+                }
+            }, 1000);
+            isRunning = true;
+        }
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+        isRunning = false;
+        updateTimerDisplay();
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timeLeft = timerDuration;
+        isRunning = false;
+        updateTimerDisplay();
+    }
+
+    function incTimer() {
+        timeLeft += 5;
+        updateTimerDisplay();
+    }
+
+    function decTimer() {
+        timeLeft -= 5;
+        updateTimerDisplay();
+    }
+
+    // Event listeners for buttons
+    playBtn.addEventListener('click', startTimer);
+    pauseBtn.addEventListener('click', pauseTimer);
+    resetBtn.addEventListener('click', resetTimer);
+    plusBtn.addEventListener('click', incTimer);
+    minusBtn.addEventListener('click', decTimer);
+
+    // Initialize display on load
+    updateTimerDisplay();
 });

@@ -29,6 +29,7 @@ button {
     background-color: rgb(176, 176, 176);
     color: black;
     border: 2px solid rgb(94, 94, 94);
+    cursor: pointer;
 }
 
 /* Styles des scores */
@@ -99,4 +100,30 @@ button {
     width: 50%;
     margin: auto;
     padding: 10px;
+}
+
+.timer {
+    position: fixed;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensures the popup is above other content */
+    background-color: lightskyblue;
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    width: 250px;
+    text-align: center;
+}
+
+#timer-display {
+    font-size: 50px;  /* Taille de police des scores */
+    font-weight: bold; /* Gras pour mettre en valeur */
+}
+
+div.timer > div {
+    display: flex; /* Use flexbox layout */
+    justify-content: space-around; /* Distribute space evenly between items */
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px; /* Optional: Add space between elements */
 }
