@@ -46,11 +46,9 @@ def annulerAction(id_arene):
     return jsonify(arene=competition.arenes[id_arene].to_json())
 
 ################### Routes pour l'affichage ###################
-@app.route('/score/<int:id_arene>', methods=['POST'])
-def score(id_arene):
-    # TODO : renvoyer l'objet arene et adapter l'affichage
-    # return jsonify(arene=competition.arenes[id_arene].to_json())
-    return jsonify(score=competition.arenes[id_arene].score)
+@app.route('/infos/<int:id_arene>', methods=['POST'])
+def infos(id_arene):
+    return jsonify(arene=competition.arenes[id_arene].to_json())
 
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000
