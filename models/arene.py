@@ -34,13 +34,22 @@ class Arene(object):
 	def ajouterCarton(self, combattant, couleur):
 		# on ajoute un carton
 		self.cartons[combattant][couleur] += 1
+		
+		adversaire = "vert" if combattant == "rouge" else "rouge"
 		# pour les cartons au-dessus du blanc, le score change
-		if couleur != "blanc":
-			adversaire = "vert" if combattant == "rouge" else "rouge"
-			if couleur == "rouge" :
-				self.score[adversaire] += 5 #score ajouter a l'adversaire au carton rouge
-			else : 
-				self.score[adversaire] += 3 #score ajouter a l'adversaire au carton jaune
+		if couleur == "blanc":
+			# [TODO issue#3]
+			# # au delà de 1 carton blanc, on accorde 3pts à l'adversaire
+			# # à chaque nouveau carton
+			# if self.cartons[combattant][couleur] >= 2:
+			# 	self.score[adversaire] += 3 
+			pass
+		elif couleur == "jaune":
+			# carton jaune = 3pts pour l'adversaire
+			self.score[adversaire] += 3
+		elif couleur == "rouge":
+			# carton rouge = 5pts pour l'adversaire
+			self.score[adversaire] += 5
 
 		# on garde un historique des actions effectuées
 		t = datetime.now().time()
@@ -63,9 +72,16 @@ class Arene(object):
 			# un carton blanc
 			_, combattant, _, couleur = last_action
 			self.cartons[combattant][couleur] -= 1
-			if couleur != "blanc":
-				adversaire = "vert" if combattant == "rouge" else "rouge"
+
+			adversaire = "vert" if combattant == "rouge" else "rouge"
+			if couleur == "blanc":
+				# [TODO issue#3]
+				pass
+			elif couleur == "jaune":
 				self.score[adversaire] -= 3
+			elif couleur == "rouge":
+				self.score[adversaire] -= 5
+
 			self.historique.pop(-1)
 		elif last_action[3] == "point(s)":
 			# Dans le cas d'un ajout de point
