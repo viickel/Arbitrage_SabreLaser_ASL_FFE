@@ -7,6 +7,7 @@
 {% endblock %}
 
 {% block body %}
+    <span class="hidden" data-value="{{ arene._id }}">
     <div>
         Combattant Rouge : <span id="score_rouge">{{ arene.score['rouge'] }}</span> - Combattant Vert : <span id="score_vert">{{ arene.score['vert'] }}</span>
     </div>
