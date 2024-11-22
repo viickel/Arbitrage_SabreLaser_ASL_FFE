@@ -54,7 +54,7 @@ class Arene(object):
 
 		# on garde un historique des actions effectuées
 		t = datetime.now().time()
-		timestamp = f"{t.hour}:{t.minute}:{t.second}"
+		timestamp = f"{t.hour:02}h{t.minute:02}:{t.second:02}"
 		self.historique.append((timestamp, combattant, "carton", couleur))
 		self.last_action_msg = f"[{self.historique[-1][0]}] {self.historique[-1][1]}:"
 		self.last_action_msg += f" {self.historique[-1][2]} {self.historique[-1][3]}"
@@ -64,7 +64,7 @@ class Arene(object):
 
 		# on garde un historique des actions effectuées
 		t = datetime.now().time()
-		timestamp = f"{t.hour}h{t.minute}:{t.second:02}"
+		timestamp = f"{t.hour:02}h{t.minute:02}:{t.second:02}"
 		self.historique.append((timestamp, combattant, increment, "point(s)"))
 		self.last_action_msg = f"[{self.historique[-1][0]}] {self.historique[-1][1]}:"
 		self.last_action_msg += f" {self.historique[-1][2]} {self.historique[-1][3]}"
