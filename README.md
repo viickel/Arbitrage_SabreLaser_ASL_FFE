@@ -10,8 +10,11 @@ L'application doit pour le moment fonctionner de manière indépendante. Par exe
 Par contre, dans les dictionnaires de données je prévois déjà des variables comme le numero de licence pour relier à une base de données ou bien les points quest pour enregistrer les match.
 
 ## Structures de données
-Les objets manipulés par l'interface web sont les arènes et les combattants.
+Les objets manipulés par l'interface web sont les arènes et les combattants, rassemblés dans une compétition.
 Ces objets python possèdent les attributs et méthodes suivants :
+
+### Compétition
+- arenes
 
 ### Arène
 - numero
