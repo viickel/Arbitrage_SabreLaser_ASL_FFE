@@ -27,22 +27,18 @@ def arene(id_arene):
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])
 def incrementScore(id_arene, combattant, valeur):
-    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    last_action = competition.arenes[id_arene].incrementerScore(combattant, valeur)
+    competition.arenes[id_arene].incrementerScore(combattant, valeur)
     return jsonify(arene=competition.arenes[id_arene].to_json()) 
 
 @app.route('/increment-carton/<int:id_arene>/<combattant>/<couleur>', methods=['POST'])
 def incrementCarton(id_arene, combattant, couleur):
-    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    last_action = competition.arenes[id_arene].ajouterCarton(combattant, couleur)
+    competition.arenes[id_arene].ajouterCarton(combattant, couleur)
     return jsonify(arene=competition.arenes[id_arene].to_json())
 
 @app.route('/annuler/<int:id_arene>', methods=['POST'])
 def annulerAction(id_arene):
-    if len(competition.arenes[id_arene].historique) == 0:
-        return jsonify(arene=competition.arenes[id_arene].to_json())
-    
-    competition.arenes[id_arene].annulerDerniereAction()
+    if len(competition.arenes[id_arene].historique) != 0:
+        competition.arenes[id_arene].annulerDerniereAction()
     return jsonify(arene=competition.arenes[id_arene].to_json())
 
 ################### Routes pour l'affichage ###################
