@@ -1,5 +1,7 @@
-function updateTimerDisplay() {
-    $.post(`/score/1`, function(data) {
+function updateDisplay() {
+    const id_arene = $('.hidden').data('value');
+
+    $.post(`/score/${id_arene}`, function(data) {
         // pour l'instant, ne fonctionne qu'avec
         // une seule arène
         $(`#score_rouge`).text(data.score['rouge']);
@@ -7,4 +9,4 @@ function updateTimerDisplay() {
     });
 }
 
-setInterval(() => {updateTimerDisplay();}, 500);
+setInterval(() => {updateDisplay();}, 500);

@@ -2,9 +2,9 @@ from datetime import datetime
 
 class Arene(object):
 	"""docstring for Arene"""
-	def __init__(self, numero, combattant_rouge, combattant_vert):
+	def __init__(self, _id, combattant_rouge, combattant_vert):
 		super(Arene, self).__init__()
-		self.numero = numero
+		self._id = _id
 		self.combattants = {
 			"rouge":combattant_rouge,
 			"vert":combattant_vert
@@ -26,6 +26,7 @@ class Arene(object):
 			}
 		}
 		self.historique = []
+		self.last_action_msg = ""
 		# TODO
 		# self.chrono
 		# self.statut = "en attente"
@@ -55,6 +56,8 @@ class Arene(object):
 		t = datetime.now().time()
 		timestamp = f"{t.hour}:{t.minute}:{t.second}"
 		self.historique.append((timestamp, combattant, "carton", couleur))
+		self.last_action_msg = f"[{self.historique[-1][0]}] {self.historique[-1][1]}:"
+		self.last_action_msg += f" {self.historique[-1][2]} {self.historique[-1][3]}"
 
 	def incrementerScore(self, combattant, increment):
 		self.score[combattant] += increment
@@ -63,6 +66,9 @@ class Arene(object):
 		t = datetime.now().time()
 		timestamp = f"{t.hour}h{t.minute}:{t.second:02}"
 		self.historique.append((timestamp, combattant, increment, "point(s)"))
+		self.last_action_msg = f"[{self.historique[-1][0]}] {self.historique[-1][1]}:"
+		self.last_action_msg += f" {self.historique[-1][2]} {self.historique[-1][3]}"
+		return self.last_action_msg
 
 	def annulerDerniereAction(self):
 		last_action = self.historique[-1]
@@ -89,6 +95,23 @@ class Arene(object):
 			_, combattant, valeur, _ = last_action
 			self.score[combattant] -= valeur
 			self.historique.pop(-1)
+
+		if len(self.historique) > 0:
+			self.last_action_msg = f"[{self.historique[-1][0]}] {self.historique[-1][1]}:"
+			self.last_action_msg += f" {self.historique[-1][2]} {self.historique[-1][3]}"
+		else:
+			self.last_action_msg = ""
+		return self.last_action_msg
+
+	def to_json(self):
+		d = {}
+		d["_id"] = self._id
+		# d["combattants"] = self.combattants # combattants are not JSON serializable (yet)
+		d["score"] = self.score
+		d["cartons"] = self.cartons
+		d["historique"] = self.historique
+		d["last_action_msg"] = self.last_action_msg
+		return d
 
 	def vainqueur(self):
 		# vérifier que la fin du match a eu lieu
