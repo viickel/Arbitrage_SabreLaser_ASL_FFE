@@ -93,13 +93,13 @@ body.arbitrage button {
     padding: 20px;
 }
 
-.ligne_historique.rouge {
+.ligne_historique_rouge {
     text-align: center;
     background-color: rgb(165, 23, 23);
     padding: 5px;
 }
 
-.ligne_historique.vert {
+.ligne_historique_vert {
     text-align: center;
     background-color: rgb(22, 93, 22);
     padding: 5px;
