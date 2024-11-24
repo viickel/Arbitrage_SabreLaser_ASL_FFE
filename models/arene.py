@@ -38,9 +38,9 @@ class Arene(object):
 		if couleur != "blanc":
 			adversaire = "vert" if combattant == "rouge" else "rouge"
 			if couleur == "rouge" :
-				self.score[adversaire] += 5 
+				self.score[adversaire] += 5 #score ajouter a l'adversaire au carton rouge
 			else : 
-				self.score[adversaire] += 3
+				self.score[adversaire] += 3 #score ajouter a l'adversaire au carton jaune
 
 
 		# on garde un historique des actions effectuées
