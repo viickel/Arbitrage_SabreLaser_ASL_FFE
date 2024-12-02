@@ -3,13 +3,13 @@
 {% block head %}
 	<title>Interface d'Arbitrage</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/Arbitrage.css') }}">
 	<script src="{{ url_for('static', filename='js/arbitrage.js') }}"></script>
 {% endblock %}
 
 {% block body %}
 <center>
-	<h1>Arene #{{ arene._id }} </h1>
+	<h1>Arene #{{ arene.numero }} </h1>
 
 	<div>   
 		<table>          
@@ -25,18 +25,18 @@
 			<tr>
 				<td class="score-cell score-rouge"> 
 					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="1"> +1 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="3"> +3 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="5"> +5 point </button>
+					<button class="increment-score" data-color="rouge" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="rouge" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="rouge" data-value="5"> +5 point </button>
 					
 					</center> <!-- à enlever -->
 				</td> 
 
 				<td class="score-cell score-vert"> 
 					<p><center><h1 id="score_vert">{{ arene.score['vert'] }}</h1></p>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="1"> +1 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="3"> +3 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="5"> +5 point </button>
+					<button class="increment-score" data-color="vert" data-value="1"> +1 point </button>
+					<button class="increment-score" data-color="vert" data-value="3"> +3 point </button>
+					<button class="increment-score" data-color="vert" data-value="5"> +5 point </button>
 
 					</center> <!-- à enlever -->
 				</td>
@@ -45,18 +45,18 @@
 			<tr>
 				<td><center>
 					<p>Cartons: Blanc: <span id="cbt_rouge_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_rouge_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_rouge_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="blanc"> Carton Blanc </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="jaune"> Carton Jaune </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="rouge"> Carton Rouge </button>
+					<button class="increment-carton" data-color="rouge" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="rouge" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="rouge" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
 
 				<td><center>
 					<p>Cartons: Blanc: <span id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="blanc"> Carton Blanc </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="jaune"> Carton Jaune </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="rouge"> Carton Rouge </button>
+					<button class="increment-carton" data-color="vert" data-value="blanc"> Carton Blanc </button>
+					<button class="increment-carton" data-color="vert" data-value="jaune"> Carton Jaune </button>
+					<button class="increment-carton" data-color="vert" data-value="rouge"> Carton Rouge </button>
 
 					</center> <!-- à enlever -->
 				</td>
@@ -66,27 +66,15 @@
 	</div>
 
 	<div class="historique">
-		<div class="annuler" data-arene="{{ arene._id }}">
-			<button >Annuler la dernière action</button>
+		<div class="annuler">
+			<button>Annuler la dernière action</button>
 		</div>
 		<div id=liste_historique>
 			{% for ligne in arene.historique[::-1] %}
-				<div class="ligne_historique {{ligne[1]}}">
+				<div class="ligne_historique_{{ligne[1]}}">
 					[{{ ligne[0] }}] {{ ligne[1] }}: {{ ligne[2] }} {{ ligne[3] }}
 				</div>
 			{% endfor %}
 		</div>
 	</div>
-
-	<div class="timer">
-		<div>
-			<button id="plus-btn">+5</button>
-			<div id="timer-display">00:00</div>
-			<button id="minus-btn">-5</button>
-		</div>
-		<button id="play-btn">Play</button>
-		<button id="pause-btn">Pause</button>
-		<button id="reset-btn">Reset</button>
-	</div>
-	 
 {% endblock %}
