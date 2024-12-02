@@ -11,29 +11,17 @@ combattant_rouge = Combattant("Atom")
 combattant_vert = Combattant("Zeus")
 arena = Arene(1, combattant_rouge, combattant_vert)
 
-@app.route('/affichage/<int:id_arene>')
-def affichage(id_arene):
-    if 0 < id_arene < len(competition.arenes):
-        return render_template('affichage.html', 
-            arene=competition.arenes[id_arene])
-    else:
-        return "Il n'y a pas d'arène avec ce numéro"
+@app.route('/affichage/<int:num>')
+def affichage(num):
+    return render_template('affichage.html', arene=arena)
 
-@app.route('/bandeau/<int:id_arene>')
-def bandeau(id_arene):
-    if 0 < id_arene < len(competition.arenes):
-        return render_template('bandeau.html', 
-            arene=competition.arenes[id_arene])
-    else:
-        return "Il n'y a pas d'arène avec ce numéro"
+@app.route('/bandeau/<int:num>')
+def bandeau(num):
+    return render_template('bandeau.html', arene=arena)
 
-@app.route('/Arene/<int:id_arene>')
-def arene(id_arene):
-    if 0 < id_arene < len(competition.arenes):
-        return render_template('arbitrage.html', 
-            arene=competition.arenes[id_arene])
-    else:
-        return "Il n'y a pas d'arène avec ce numéro"
+@app.route('/Arene/<int:num>')
+def arene(num):
+    return render_template('arbitrage.html', arene=arena)
 
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<combattant>/<int:valeur>', methods=['POST'])
