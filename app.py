@@ -11,18 +11,27 @@ competition = Competition(arenes)
 
 @app.route('/affichage/<int:id_arene>')
 def affichage(id_arene):
-    return render_template('affichage.html', 
-        arene=competition.arenes[id_arene])
+    if 0 < id_arene < len(competition.arenes):
+        return render_template('affichage.html', 
+            arene=competition.arenes[id_arene])
+    else:
+        return "Il n'y a pas d'arène avec ce numéro"
 
 @app.route('/bandeau/<int:id_arene>')
 def bandeau(id_arene):
-    return render_template('bandeau.html', 
-        arene=competition.arenes[id_arene])
+    if 0 < id_arene < len(competition.arenes):
+        return render_template('bandeau.html', 
+            arene=competition.arenes[id_arene])
+    else:
+        return "Il n'y a pas d'arène avec ce numéro"
 
 @app.route('/Arene/<int:id_arene>')
 def arene(id_arene):
-    return render_template('arbitrage.html', 
-        arene=competition.arenes[id_arene])
+    if 0 < id_arene < len(competition.arenes):
+        return render_template('arbitrage.html', 
+            arene=competition.arenes[id_arene])
+    else:
+        return "Il n'y a pas d'arène avec ce numéro"
 
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])
