@@ -1,15 +1,13 @@
 from flask import Flask, render_template, request, jsonify
-from datetime import datetime
 
 from models import *
 
 app = Flask(__name__)
 
-# Déclaration de l'objet Arène
-# (à terme, il s'agira d'une liste d'arènes)
-combattant_rouge = Combattant("Atom")
-combattant_vert = Combattant("Zeus")
-arena = Arene(1, combattant_rouge, combattant_vert)
+# Déclaration de l'objet Competition
+# contenant une liste d'arènes
+arenes = [None] + [Arene(x+1, Combattant(f"Rouge{x+1}"), Combattant(f"Vert{x+1}")) for x in range(5)]
+competition = Competition(arenes)
 
 @app.route('/affichage/<int:num>')
 def affichage(num):
@@ -24,51 +22,27 @@ def arene(num):
     return render_template('arbitrage.html', arene=arena)
 
 ################### Routes pour l'arbitrage ###################
-@app.route('/increment-score/<combattant>/<int:valeur>', methods=['POST'])
-def incrementScore(combattant, valeur):
-    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    arena.score[combattant] += valeur
+@app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])
+def incrementScore(id_arene, combattant, valeur):
+    competition.arenes[id_arene].incrementerScore(combattant, valeur)
+    return jsonify(arene=competition.arenes[id_arene].to_json()) 
 
-    # on garde un historique des actions effectuées
-    t = datetime.now().time()
-    timestamp = f"{t.hour}:{t.minute}:{t.second:02}"
-    arena.historique.append((timestamp, combattant, valeur, "point(s)"))
-    last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
-    return jsonify(score=arena.score, last_action=last_action)
+@app.route('/increment-carton/<int:id_arene>/<combattant>/<couleur>', methods=['POST'])
+def incrementCarton(id_arene, combattant, couleur):
+    competition.arenes[id_arene].ajouterCarton(combattant, couleur)
+    return jsonify(arene=competition.arenes[id_arene].to_json())
 
-@app.route('/increment-carton/<combattant>/<couleur>', methods=['POST'])
-def incrementCarton(combattant, couleur):
-    # quand il y aura plusieurs arènes, il faudra un paramètre id_arene
-    
-    # on ajoute un carton
-    arena.cartons[combattant][couleur] += 1
-    # pour les cartons au-dessus du blanc, le score change
-    if couleur != "blanc":
-        adversaire = "vert" if combattant == "rouge" else "rouge"
-       
-        if couleur == "rouge":
-            arena.score[adversaire] += 5 #ajout de 5 point sur carton rouge
-        else : 
-            arena.score[adversaire] += 3 #ajout de 3 points sur carton jaune 
-
-
-    # on garde un historique des actions effectuées
-    t = datetime.now().time()
-    timestamp = f"{t.hour}:{t.minute}:{t.second}"
-    arena.historique.append((timestamp, combattant, "carton", couleur))
-    last_action = f"[{arena.historique[-1][0]}] {arena.historique[-1][1]}: {arena.historique[-1][2]} {arena.historique[-1][3]}"
-    return jsonify(cartons=arena.cartons, score=arena.score, last_action=last_action)
-
-@app.route('/annuler', methods=['POST'])
-def annulerAction():
-    pass
+@app.route('/annuler/<int:id_arene>', methods=['POST'])
+def annulerAction(id_arene):
+    if len(competition.arenes[id_arene].historique) != 0:
+        competition.arenes[id_arene].annulerDerniereAction()
+    return jsonify(arene=competition.arenes[id_arene].to_json())
 
 ################### Routes pour l'affichage ###################
-@app.route('/score/<int:num>', methods=['POST'])
-def score(num):
-    # TODO : utiliser num pour changer d'arène
-    return jsonify(score=arena.score)
+@app.route('/infos/<int:id_arene>', methods=['POST'])
+def infos(id_arene):
+    return jsonify(arene=competition.arenes[id_arene].to_json())
 
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000
-    app.run(debug=True,host='0.0.0.0', port=5000)
+    app.run(debug=True)

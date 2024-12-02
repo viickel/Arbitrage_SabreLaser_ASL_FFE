@@ -1,10 +1,11 @@
-function updateTimerDisplay() {
-    $.post(`/score/1`, function(data) {
-        // pour l'instant, ne fonctionne qu'avec
-        // une seule arène
-        $(`#score_rouge`).text(data.score['rouge']);
-        $(`#score_vert`).text(data.score['vert']);
+function updateDisplay() {
+    const id_arene = $('.hidden').data('value');
+
+    $.post(`/infos/${id_arene}`, function(data) {
+        $(`#score_rouge`).text(data.arene["score"]['rouge']);
+        $(`#score_vert`).text(data.arene["score"]['vert']);
+        // TODO : ajouter le suivi des cartons
     });
 }
 
-setInterval(() => {updateTimerDisplay();}, 500);
+setInterval(() => {updateDisplay();}, 500);
