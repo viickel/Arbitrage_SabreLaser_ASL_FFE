@@ -11,8 +11,6 @@ competition = Competition(arenes)
 
 @app.route('/affichage/<int:id_arene>')
 def affichage(id_arene):
-    return render_template('affichage.html', 
-        arene=competition.arenes[id_arene])
     if 0 < id_arene < len(competition.arenes):
         return render_template('affichage.html', 
             arene=competition.arenes[id_arene])
@@ -21,8 +19,6 @@ def affichage(id_arene):
 
 @app.route('/bandeau/<int:id_arene>')
 def bandeau(id_arene):
-    return render_template('bandeau.html', 
-        arene=competition.arenes[id_arene])
     if 0 < id_arene < len(competition.arenes):
         return render_template('bandeau.html', 
             arene=competition.arenes[id_arene])
@@ -31,8 +27,6 @@ def bandeau(id_arene):
 
 @app.route('/Arene/<int:id_arene>')
 def arene(id_arene):
-    return render_template('arbitrage.html', 
-        arene=competition.arenes[id_arene])
     if 0 < id_arene < len(competition.arenes):
         return render_template('arbitrage.html', 
             arene=competition.arenes[id_arene])
