@@ -3,29 +3,29 @@ $(document).ready(function() {
 
     // Add Object
     $('#add-button').click(function() {
-        $.post('/add-object', function(newObject) {
+        $.post('/ajouter-arene', function(response) {
             const newDiv = `
-                <div class="object" data-id="${newObject.id}">
+                <div class="object" data-id="${response.arene._id}">
                     <div>
-                        <strong>${newObject.label1}</strong><br>
-                        <strong>${newObject.label2}</strong>
+                        <strong>${response.arene.score['rouge']}</strong><br>
+                        <strong>${response.arene.score['vert']}</strong>
                     </div>
                     <div>
-                        <input type="text" class="value1 readonly" value="${newObject.value1}" readonly>
-                        <input type="text" class="value2 readonly" value="${newObject.value2}" readonly>
+                        <input type="text" class="nom_cbt_rouge readonly" value="${response.arene.combattants['rouge'].nom}" readonly>
+                        <input type="text" class="nom_cbt_vert readonly" value="${response.arene.combattants['vert'].nom}" readonly>
                     </div>
                     <button class="edit-button">Edit</button>
                     <button class="save-button" style="display: none;">Save</button>
                 </div>`;
             objectList.append(newDiv);
         }).fail(function() {
-            alert('Failed to add object.');
+            alert('Erreur dans l\'ajout de l\'arène.');
         });
     });
 
     // Remove Object
     $('#remove-button').click(function() {
-        $.post('/remove-object', function(response) {
+        $.post('/supprimer-arene', function(response) {
             const lastObject = objectList.children('.object').last();
             if (lastObject.length) {
                 lastObject.remove();

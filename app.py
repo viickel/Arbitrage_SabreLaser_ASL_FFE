@@ -56,6 +56,18 @@ def changeNomCbt(id_arene):
     competition.arenes[id_arene].combattants['vert'].nom = nom_cbt_vert
     return jsonify(arene=competition.arenes[id_arene].to_json())
 
+@app.route('/ajouter-arene', methods=['POST'])
+def ajouterArene():
+    x = len(competition.arenes)
+    a = Arene(x, Combattant(f"Rouge{x}"), Combattant(f"Vert{x}"))
+    competition.ajouterArene(a)
+    return jsonify(arene=a.to_json())
+
+@app.route('/supprimer-arene', methods=['POST'])
+def supprimerArene():
+    # pour le moment, supprime la dernière arène
+    _id = competition.supprimerArene(-1)._id
+    return {'message': f'Arène {_id} supprimée'}
 
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])

@@ -10,7 +10,11 @@ class Competition(object):
 		self.combattants = []
 		self.matchs = []
 
-	def ajouterArene(self, arene): pass
-	def supprimerArene(self, num_arene: int): pass
+	def ajouterArene(self, arene): 
+		self.arenes.append(arene)
+
+	def supprimerArene(self, num_arene: int):
+		return self.arenes.pop(num_arene)
+	
 	@classmethod
 	def importerConfiguration(cls, file): pass
