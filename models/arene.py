@@ -106,7 +106,10 @@ class Arene(object):
 	def to_json(self):
 		d = {}
 		d["_id"] = self._id
-		# d["combattants"] = self.combattants # combattants are not JSON serializable (yet)
+		d["combattants"] = {
+			"rouge":self.combattants["rouge"].to_json(),
+			"vert":self.combattants["vert"].to_json()
+			}
 		d["score"] = self.score
 		d["cartons"] = self.cartons
 		d["historique"] = self.historique
