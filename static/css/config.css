@@ -1,25 +1,133 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.object {
-    border: 1px solid #ccc;
-    padding: 10px;
+
+/* Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Allows content to grow beyond the viewport height */
+    padding: 20px; /* Adds some spacing for better visibility */
+}
+
+/* Ensure scrolling */
+html, body {
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+/* Main Container */
+.container {
+    width: 75%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Heading */
+h1 {
+    font-size: 2.5rem;
+    color: #00ff88;
+    text-shadow: 0 0 10px #00ff88;
     margin-bottom: 10px;
+}
+
+/* Controls Styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #1f1f1f;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #00cc6e;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Object List */
+#object-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Object Styling */
+.object {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%;
+    padding: 15px;
+    border: 1px solid #00ff88;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    box-shadow: 0 0 15px #00ff88;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-.object div {
-    margin: 0 10px;
+
+.object:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #00ff88;
 }
-.readonly {
-    background-color: #f0f0f0;
-    border: none;
-    color: #666;
+
+/* Object Components */
+.object-id {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #00ccff;
 }
-button {
-    cursor: pointer;
-    margin-right: 5px;
+
+input {
+    flex: 2;
+    padding: 5px;
+    font-size: 1rem;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    text-align: center;
+}
+
+input.readonly {
+    background-color: #2a2a2a;
+    color: #888;
+}
+
+.label {
+    flex: 3;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.red-label {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.green-label {
+    color: #44ff44;
+    font-weight: bold;
 }

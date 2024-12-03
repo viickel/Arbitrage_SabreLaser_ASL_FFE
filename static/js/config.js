@@ -6,16 +6,13 @@ $(document).ready(function() {
         $.post('/ajouter-arene', function(response) {
             const newDiv = `
                 <div class="object" data-id="${response.arene._id}">
-                    <div>
-                        <strong>${response.arene.score['rouge']}</strong><br>
-                        <strong>${response.arene.score['vert']}</strong>
-                    </div>
-                    <div>
-                        <input type="text" class="nom_cbt_rouge readonly" value="${response.arene.combattants['rouge'].nom}" readonly>
-                        <input type="text" class="nom_cbt_vert readonly" value="${response.arene.combattants['vert'].nom}" readonly>
-                    </div>
+                    <div class="object-id">#${response.arene._id}</div>
+                    <input type="text" class="nom_cbt_rouge readonly" value="${response.arene.combattants['rouge'].nom}" readonly>
+                    <span class="label red-label">Rouge: ${response.arene.score['rouge']}</span>
                     <button class="edit-button">Edit</button>
                     <button class="save-button" style="display: none;">Save</button>
+                    <span class="label green-label">Vert: ${response.arene.score['vert']}</span>
+                    <input type="text" class="nom_cbt_vert readonly" value="${response.arene.combattants['vert'].nom}" readonly>
                 </div>`;
             objectList.append(newDiv);
         }).fail(function() {
