@@ -1,0 +1,79 @@
+/* Timer Container Styling */
+.timer-container {
+    width: 400px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    box-shadow: 0 0 20px #00ff88;
+}
+
+/* Timer Row Layout */
+.timer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Timer Display */
+.timer-display {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1f1f1f, #292929);
+    border-radius: 10px;
+    box-shadow: 0 0 15px #00ff88;
+    padding: 10px;
+}
+
+.timer-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #00ccff;
+    text-shadow: 0 0 10px #00ccff;
+}
+
+/* Button Styling */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #1f1f1f;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    background-color: #00cc6e;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Plus and Minus Buttons */
+#plus-button, #minus-button {
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #ff4444;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+#plus-button:hover, #minus-button:hover {
+    background-color: #ff6666;
+}

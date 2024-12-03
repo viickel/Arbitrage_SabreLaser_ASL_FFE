@@ -4,6 +4,7 @@
 	<title>Interface d'Arbitrage</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/chrono.css') }}">
 	<script src="{{ url_for('static', filename='js/arbitrage.js') }}"></script>
 {% endblock %}
 
@@ -12,7 +13,25 @@
 <center>
 	<h1>Arene #{{ arene._id }} </h1>
 
-	<div>   
+	<div class="timer-container">
+        <!-- First Line: Plus, Timer Display, Minus -->
+        <div class="timer-row">
+            <button id="plus-button">+</button>
+            <div class="timer-display">
+                <div class="timer-value" id="timer-value">03:30</div>
+            </div>
+            <button id="minus-button">−</button>
+        </div>
+
+        <!-- Second Line: Start, Pause, Reset -->
+        <div class="timer-row controls">
+            <button id="start-button">Start</button>
+            <button id="pause-button">Pause</button>
+            <button id="reset-button">Reset</button>
+        </div>
+    </div>
+
+	<div>
 		<table>          
 			<tr> 
 				<td style="padding-right: 75px;">
@@ -78,16 +97,4 @@
 			{% endfor %}
 		</div>
 	</div>
-
-	<div class="timer">
-		<div>
-			<button id="plus-btn">+5</button>
-			<div id="timer-display">00:00</div>
-			<button id="minus-btn">-5</button>
-		</div>
-		<button id="play-btn">Play</button>
-		<button id="pause-btn">Pause</button>
-		<button id="reset-btn">Reset</button>
-	</div>
-	 
 {% endblock %}

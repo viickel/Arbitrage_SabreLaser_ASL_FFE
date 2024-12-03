@@ -54,17 +54,17 @@ $(document).ready(function() {
     let timerInterval;
     let isRunning = false;
 
-    const timerDisplay = document.getElementById('timer-display');
-    const playBtn = document.getElementById('play-btn');
-    const pauseBtn = document.getElementById('pause-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const plusBtn = document.getElementById('plus-btn');
-    const minusBtn = document.getElementById('minus-btn');
+    const timerValue = document.getElementById('timer-value');
+    const playBtn = document.getElementById('start-button');
+    const pauseBtn = document.getElementById('pause-button');
+    const resetBtn = document.getElementById('reset-button');
+    const plusBtn = document.getElementById('plus-button');
+    const minusBtn = document.getElementById('minus-button');
 
     function updateTimerDisplay() {
         let minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
         let seconds = (timeLeft % 60).toString().padStart(2, '0');
-        timerDisplay.textContent = `${minutes}:${seconds}`;
+        timerValue.textContent = `${minutes}:${seconds}`;
 
         // Enable or disable the clickable button based on timeLeft
         plusBtn.disabled = isRunning == true;
