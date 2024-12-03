@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.object {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}
+.object div {
+    margin: 0 10px;
+}
+.readonly {
+    background-color: #f0f0f0;
+    border: none;
+    color: #666;
+}
+button {
+    cursor: pointer;
+    margin-right: 5px;
+}

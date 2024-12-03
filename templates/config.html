@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Configuration Page</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/config.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h1>Page de configuration</h1>
+
+    <div>
+        <button id="add-button">+ Ajouter une arène</button>
+        <button id="remove-button">- Enlever une arène</button>
+    </div>
+
+    <div id="object-list">
+        {% for arene in competition.arenes[1:] %}
+        <div class="object" data-id="{{ arene._id }}">
+            <div>
+                <strong>{{ arene.score['rouge'] }}</strong><br>
+                <strong>{{ arene.score['vert'] }}</strong>
+            </div>
+            <div>
+                <input type="text" class="nom_cbt_rouge readonly" value="{{ arene.combattants['rouge'].nom }}" readonly>
+                <input type="text" class="nom_cbt_vert readonly" value="{{ arene.combattants['vert'].nom }}" readonly>
+            </div>
+            <button class="edit-button">Edit</button>
+            <button class="save-button" style="display: none;">Save</button>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

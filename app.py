@@ -39,6 +39,24 @@ def arene(id_arene):
     else:
         return "Il n'y a pas d'arène avec ce numéro"
 
+
+################### Routes pour la configuration ###################
+@app.route('/configuration')
+def configuration():
+    return render_template('config.html',
+        competition=competition)
+
+
+@app.route('/changer-nom/<int:id_arene>', methods=['POST'])
+def changeNomCbt(id_arene):
+    data = request.json
+    nom_cbt_rouge = data.get('nom_cbt_rouge')
+    nom_cbt_vert = data.get('nom_cbt_vert')
+    competition.arenes[id_arene].combattants['rouge'].nom = nom_cbt_rouge
+    competition.arenes[id_arene].combattants['vert'].nom = nom_cbt_vert
+    return jsonify(arene=competition.arenes[id_arene].to_json())
+
+
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])
 def incrementScore(id_arene, combattant, valeur):
