@@ -1,0 +1,170 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* Page Container */
+.page-container {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+}
+
+/* Title Styling */
+.title {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: #00ccff;
+    text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff, 0 0 40px #00ccff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1f1f1f, #292929);
+    box-shadow: 0 0 30px rgba(0, 204, 255, 0.8);
+    width: 100%;
+}
+
+/* Arena Container */
+.arena-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    width: 75%;
+}
+
+/* Columns for Red and Green Sides */
+.column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #292929, #343434);
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+}
+
+.red-side {
+    border: 2px solid #ff4444;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.8);
+}
+
+.green-side {
+    border: 2px solid #00ff88;
+    box-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
+}
+
+/* Score Container */
+.score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.score-label {
+    font-family: 'Anton', sans-serif;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 10px #00ff88;
+}
+
+/* Score Buttons */
+.score-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Futuristic Button */
+.futuristic-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #1f1f1f;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.futuristic-button:hover {
+    transform: scale(1.1);
+    background-color: #00cc6e;
+}
+
+.futuristic-button:active {
+    transform: scale(0.95);
+}
+
+/* Action Container */
+.action-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Individual Action Button */
+.action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.carton-label {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-size: 20px;
+    color: black;
+    font-family: 'Orbitron';
+}
+
+/* Button Colors */
+.carton-label.white {
+    background-color: #e0e0e0;
+    box-shadow: 0 0 10px #e0e0e0;
+}
+
+.carton-label.yellow {
+    background-color: #ffc107;
+    box-shadow: 0 0 10px #ffc107;
+}
+
+.carton-label.red {
+    background-color: #ff4444;
+    box-shadow: 0 0 10px #ff4444;
+}
+
+.carton-label:hover {
+    transform: scale(1.1);
+}
+
+.carton-label:active {
+    transform: scale(0.95);
+}
