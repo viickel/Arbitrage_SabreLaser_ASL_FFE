@@ -25,7 +25,7 @@ class Arene(object):
 				"rouge":0
 			}
 		}
-		self.historique = []
+		self.historique = [] # TODO: créer un objet log
 		self.last_action_msg = ""
 		# TODO
 		# self.chrono
