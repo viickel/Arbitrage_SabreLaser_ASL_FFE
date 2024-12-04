@@ -1,14 +1,61 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Bandeau Transparent</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Affichage des Scores</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bandeau.css') }}">
     <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
-    
 {% endblock %}
 
 {% block body %}
+    <div class="page-container">
+        <div class="object-id">#{{ arene._id }}</div>
+        <span class="hidden" data-value="{{ arene._id }}"></span>
+
+        <!-- Red Side -->
+        <div class="column red-side">
+            <!-- Action Buttons -->
+            <div class="action">
+                <button class="carton-label white" id="cbt_rouge_carton_blanc">{{ arene.cartons['rouge']['blanc'] }}</button>
+            </div>
+            <div class="action">
+                <button class="carton-label yellow" id="cbt_rouge_carton_jaune">{{ arene.cartons['rouge']['jaune'] }}</button>
+            </div>
+            <div class="action">
+                <button class="carton-label red" id="cbt_rouge_carton_rouge">{{ arene.cartons['rouge']['rouge'] }}</button>
+            </div>
+            
+            <!-- Score and Buttons -->
+            <div class="score-container">
+                <div class="score-label">
+                    {{ arene.combattants['rouge'].nom }}: <span id="score_rouge">{{ arene.score['rouge'] }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Green Side -->
+        <div class="column green-side">
+            <!-- Score and Buttons -->
+            <div class="score-container">
+                <div class="score-label">
+                    <span id="score_vert">{{ arene.score['vert'] }}</span> :{{ arene.combattants['vert'].nom }}
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action">
+                <button class="carton-label white" id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</button>
+            </div>
+            <div class="action">
+                <button class="carton-label yellow" id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</button>
+            </div>
+            <div class="action">
+                <button class="carton-label red" id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
 <div class="score-banner">
     <div class="score-section rouge">
         <h2 class="name">{{ arene.combattants['rouge'].nom }}</h2>
@@ -23,4 +70,3 @@
         <p class="score"><span id="score_vert">{{ arene.score['vert'] }}</span></p>
     </div>
 </div>
-{% endblock %}
