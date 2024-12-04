@@ -6,10 +6,10 @@
     flex-direction: column;
     gap: 15px;
     padding: 20px;
-    border: 2px solid #00ff88;
+    border: 2px solid rgba(0, 204, 255, 0.8);
     border-radius: 10px;
     background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
-    box-shadow: 0 0 20px #00ff88;
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.8);
 }
 
 /* Timer Row Layout */
@@ -62,8 +62,8 @@ button:active {
 
 /* Plus and Minus Buttons */
 #plus-button, #minus-button {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
