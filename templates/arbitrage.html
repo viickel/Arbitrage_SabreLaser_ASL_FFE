@@ -15,35 +15,32 @@
 <center>
 	<h1>Arene #{{ arene._id }} </h1>
 
-	<div class="timer-container">
-        <!-- First Line: Plus, Timer Display, Minus -->
-        <div class="timer-row">
-            <button id="plus-button">+</button>
-            <div class="timer-display">
-                <div class="timer-value" id="timer-value">03:30</div>
-            </div>
-            <button id="minus-button">−</button>
-        </div>
+	<div class="names-and-timer">
+		<h1>{{ arene.combattants['rouge'].nom }}</h1>
 
-        <!-- Second Line: Start, Pause, Reset -->
-        <div class="timer-row controls">
-            <button id="start-button">Start</button>
-            <button id="pause-button">Pause</button>
-            <button id="reset-button">Reset</button>
-        </div>
-    </div>
+		<div class="timer-container">
+	        <!-- First Line: Plus, Timer Display, Minus -->
+	        <div class="timer-row">
+	            <button id="plus-button">+</button>
+	            <div class="timer-display">
+	                <div class="timer-value" id="timer-value">03:30</div>
+	            </div>
+	            <button id="minus-button">−</button>
+	        </div>
+
+	        <!-- Second Line: Start, Pause, Reset -->
+	        <div class="timer-row controls">
+	            <button id="start-button">Start</button>
+	            <button id="pause-button">Pause</button>
+	            <button id="reset-button">Reset</button>
+	        </div>
+	    </div>
+		
+		<h1>{{ arene.combattants['vert'].nom}}</h1>
+	</div>
 
 	<div>
-		<table>          
-			<tr> 
-				<td style="padding-right: 75px;">
-					<center><h1>{{ arene.combattants['rouge'].nom }}</h1> </center>
-				</td> 
-				<td>
-					<center> <h1>{{ arene.combattants['vert'].nom}}</h1></center>
-				</td>
-			</tr>
-
+		<table>
 			<tr>
 				<td class="score-cell score-rouge"> 
 					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>

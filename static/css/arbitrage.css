@@ -13,8 +13,9 @@ body {
 }
 
 body.arbitrage h1 {
-    font-size: 30px;  /* Taille de police des titres */
+    font-size: 50px;  /* Taille de police des titres */
     color: white;
+    font-family: 'Anton';
 }
 
 body.affichage h1 {
@@ -85,5 +86,10 @@ body.arbitrage button {
     border: 2px solid crimson;
 }
 
+.names-and-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
     padding: 10px;
 }
