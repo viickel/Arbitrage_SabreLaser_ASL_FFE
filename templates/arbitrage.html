@@ -5,6 +5,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/chrono.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap">
 	<script src="{{ url_for('static', filename='js/arbitrage.js') }}"></script>
 {% endblock %}
 
@@ -85,16 +87,21 @@
 		</center> <!-- à enlever -->
 	</div>
 
-	<div class="historique">
-		<div class="annuler" data-arene="{{ arene._id }}">
-			<button >Annuler la dernière action</button>
-		</div>
-		<div id=liste_historique>
-			{% for ligne in arene.historique[::-1] %}
-				<div class="ligne_historique {{ligne[1]}}">
-					[{{ ligne[0] }}] {{ ligne[1] }}: {{ ligne[2] }} {{ ligne[3] }}
-				</div>
-			{% endfor %}
-		</div>
+	<div class="history">
+	    <!-- Cancel Last Action Button -->
+	    <div class="annuler" data-arene="{{ arene._id }}">
+	        <button class="cancel-button">Annuler la dernière action</button>
+	    </div>
+
+	    <!-- Historical Actions List -->
+	    <div id="actions-list">
+	        {% for ligne in arene.historique[::-1] %}
+	            <div class="history_line">
+	                <span class="history-timestamp">{{ ligne[0] }}</span>
+	                <span class="history-category {{ ligne[1] }}">{{ ligne[1] }}</span>: 
+	                <span class="history-details">{{ ligne[2] }} {{ ligne[3] }}</span>
+	            </div>
+	        {% endfor %}
+	    </div>
 	</div>
 {% endblock %}

@@ -1,0 +1,89 @@
+/* Historique Container */
+.history {
+    margin: 20px auto;
+    width: 50%;
+    padding: 20px;
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    box-shadow: 0 0 20px #00ff88;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.annuler {
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+}
+
+/* Button Styling */
+.cancel-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #1f1f1f;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    font-family: 'Orbitron';
+    font-weight: bold;
+}
+
+.cancel-button:hover {
+    transform: scale(1.1);
+    background-color: #ff6666;
+}
+
+.cancel-button:active {
+    transform: scale(0.95);
+}
+
+/* Historical List Container */
+.history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 300px; /* Limit height for scrollable behavior */
+    overflow-y: auto;
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #1f1f1f, #292929);
+    box-shadow: 0 0 10px #00ccff;
+}
+
+/* Historical Entry */
+.history_line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: linear-gradient(135deg, #232323, #2e2e2e);
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-size: 20px;
+    font-family: 'Orbitron';
+}
+
+/* Historical Entry Content */
+.history-timestamp {
+    color: #00ccff;
+    font-weight: bold;
+}
+
+.history-category.rouge {
+    color: #ff4444;
+    font-weight: bold;
+}
+
+.history-category.vert {
+    color: #00ff88;
+    font-weight: bold;
+}
+
+.history-details {
+    color: #e0e0e0;
+}

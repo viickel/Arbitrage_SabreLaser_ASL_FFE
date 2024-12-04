@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         $.post(`/increment-score/${id_arene}/${color}/${value}`, function(data) {
             updateDisplay(data.arene);
-            addHistoryLine(color, data.arene["last_action_msg"]);
+            addHistoryLine(color, data.arene.historique[data.arene.historique.length-1]);
         });
     });
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
 
         $.post(`/increment-carton/${id_arene}/${color}/${value}`, function(data) {
             updateDisplay(data.arene);
-            addHistoryLine(color, data.arene["last_action_msg"]);
+            addHistoryLine(color, data.arene.historique[data.arene.historique.length-1]);
         });
     });
 
@@ -38,13 +38,19 @@ $(document).ready(function() {
 
         $.post(`/annuler/${id_arene}`, function(data) {
             updateDisplay(data.arene);
-            $('#liste_historique .ligne_historique:first').remove();
+            $('.history_line:first').remove();
         });
     });
 
-    function addHistoryLine(color, line) {
-        const html_line = `<div class="ligne_historique ${color}">${line}</div>`;
-        $('#liste_historique').prepend(html_line);
+    function addHistoryLine(color, action) {
+        const html_line = `
+            <div class="history_line">
+                <span class="history-timestamp">${action[0]}</span>
+                <span class="history-category ${action[1]}">${action[1]}</span>: 
+                <span class="history-details">${action[2]} ${action[3]}</span>
+            </div>`;
+
+        $('#actions-list').prepend(html_line);
     }
 
     ///////////////////// TIMER /////////////////////
