@@ -33,7 +33,7 @@ body {
     font-size: 3rem;
     text-transform: uppercase;
     color: #00ccff;
-    text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff, 0 0 40px #00ccff;
+    text-shadow: 0 0 100px #00ccff, 0 0 150px #00ccff, 0 0 200px #00ccff;
     text-align: center;
     padding: 20px;
     border-radius: 10px;
