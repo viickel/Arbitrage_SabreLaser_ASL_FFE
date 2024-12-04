@@ -5,7 +5,6 @@ function updateDisplay() {
         $(`#score_rouge`).text(data.arene["score"]['rouge']);
         $(`#score_vert`).text(data.arene["score"]['vert']);
         
-        // TODO : ajouter le suivi des cartons
         $(`#cbt_rouge_carton_blanc`).text(data.arene['cartons']['rouge']['blanc']);
         $(`#cbt_rouge_carton_jaune`).text(data.arene['cartons']['rouge']['jaune']);
         $(`#cbt_rouge_carton_rouge`).text(data.arene['cartons']['rouge']['rouge']);
