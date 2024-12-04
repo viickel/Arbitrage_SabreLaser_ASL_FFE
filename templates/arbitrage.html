@@ -2,21 +2,44 @@
 
 {% block head %}
 	<title>Interface d'Arbitrage</title>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/arbitrage.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/chrono.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Orbitron&display=swap">
 	<script src="{{ url_for('static', filename='js/arbitrage.js') }}"></script>
 {% endblock %}
 
 {% block body_class %}arbitrage{% endblock %}
 {% block body %}
 <center>
-	<h1>Arene #{{ arene._id }} </h1>
+	<h1 class="arena-title">Arene #{{ arene._id }}</h1>
 
 	<div class="names-and-timer">
-		<h1>{{ arene.combattants['rouge'].nom }}</h1>
+		<!-- Red Side -->
+	    <div class="column red-side">
+	        <!-- Score and Buttons -->
+	        <div class="score-container">
+	            <div class="score-label">
+	            	{{ arene.combattants['rouge'].nom }}: <span id="score_rouge">{{ arene.score['rouge'] }}</span>
+	        	</div>
+	        	<div class="score-buttons">
+                    <button data-arene="{{ arene._id }}" data-color="rouge" data-value="1" class="futuristic-button score-button">+1 pts</button>
+                    <button data-arene="{{ arene._id }}" data-color="rouge" data-value="3" class="futuristic-button score-button">+3 pts</button>
+                    <button data-arene="{{ arene._id }}" data-color="rouge" data-value="5" class="futuristic-button score-button">+5 pts</button>
+                </div>
+	        </div>
+	        <!-- Action Buttons -->
+	        <div class="action-container">
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="rouge" data-value="blanc" class="carton-button white" id="cbt_rouge_carton_blanc">{{ arene.cartons['rouge']['blanc'] }}</button>
+	            </div>
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="rouge" data-value="jaune" class="carton-button yellow" id="cbt_rouge_carton_jaune">{{ arene.cartons['rouge']['jaune'] }}</button>
+	            </div>
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="rouge" data-value="rouge" class="carton-button red" id="cbt_rouge_carton_rouge">{{ arene.cartons['rouge']['rouge'] }}</button>
+	            </div>
+	        </div>
+	    </div>
 
 		<div class="timer-container">
 	        <!-- First Line: Plus, Timer Display, Minus -->
@@ -36,52 +59,32 @@
 	        </div>
 	    </div>
 		
-		<h1>{{ arene.combattants['vert'].nom}}</h1>
-	</div>
-
-	<div>
-		<table>
-			<tr>
-				<td class="score-cell score-rouge"> 
-					<p><center><h1 id="score_rouge">{{ arene.score['rouge'] }}</h1></p>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="1"> +1 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="3"> +3 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="rouge" data-value="5"> +5 point </button>
-					
-					</center> <!-- à enlever -->
-				</td> 
-
-				<td class="score-cell score-vert"> 
-					<p><center><h1 id="score_vert">{{ arene.score['vert'] }}</h1></p>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="1"> +1 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="3"> +3 point </button>
-					<button class="increment-score" data-arene="{{ arene._id }}" data-color="vert" data-value="5"> +5 point </button>
-
-					</center> <!-- à enlever -->
-				</td>
-			</tr>
-		
-			<tr>
-				<td><center>
-					<p>Cartons: Blanc: <span id="cbt_rouge_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_rouge_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_rouge_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="blanc"> Carton Blanc </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="jaune"> Carton Jaune </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="rouge" data-value="rouge"> Carton Rouge </button>
-
-					</center> <!-- à enlever -->
-				</td>
-
-				<td><center>
-					<p>Cartons: Blanc: <span id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</span>, Jaune: <span id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</span>, Rouge: <span id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</span> </p>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="blanc"> Carton Blanc </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="jaune"> Carton Jaune </button>
-					<button class="increment-carton" data-arene="{{ arene._id }}" data-color="vert" data-value="rouge"> Carton Rouge </button>
-
-					</center> <!-- à enlever -->
-				</td>
-			</tr>
-		</table>
-		</center> <!-- à enlever -->
+		<!-- Green Side -->
+	    <div class="column green-side">
+	        <!-- Score and Buttons -->
+	        <div class="score-container">
+	            <div class="score-label">
+	            	{{ arene.combattants['vert'].nom }}: <span id="score_vert">{{ arene.score['vert'] }}</span>
+	            </div>
+	            <div class="score-buttons">
+                    <button data-arene="{{ arene._id }}" data-color="vert" data-value="1" class="futuristic-button score-button">+1 pts</button>
+                    <button data-arene="{{ arene._id }}" data-color="vert" data-value="3" class="futuristic-button score-button">+3 pts</button>
+                    <button data-arene="{{ arene._id }}" data-color="vert" data-value="5" class="futuristic-button score-button">+5 pts</button>
+                </div>
+	        </div>
+	        <!-- Action Buttons -->
+	        <div class="action-container">
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="vert" data-value="blanc" class="carton-button white" id="cbt_vert_carton_blanc">{{ arene.cartons['vert']['blanc'] }}</button>
+	            </div>
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="vert" data-value="jaune" class="carton-button yellow" id="cbt_vert_carton_jaune">{{ arene.cartons['vert']['jaune'] }}</button>
+	            </div>
+	            <div class="action">
+	                <button data-arene="{{ arene._id }}" data-color="vert" data-value="rouge" class="carton-button red" id="cbt_vert_carton_rouge">{{ arene.cartons['vert']['rouge'] }}</button>
+	            </div>
+	        </div>
+	    </div>
 	</div>
 
 	<div class="history">
@@ -101,4 +104,5 @@
 	        {% endfor %}
 	    </div>
 	</div>
+</center>
 {% endblock %}

@@ -11,7 +11,7 @@ $(document).ready(function() {
         $(`#score_vert`).text(arene["score"]["vert"]);
     }
 
-    $('.increment-score').click(function() {
+    $('.score-button').click(function() {
         const color = $(this).data('color');
         const value = $(this).data('value');
         const id_arene = $(this).data('arene');
@@ -22,7 +22,7 @@ $(document).ready(function() {
         });
     });
 
-    $('.increment-carton').click(function() {
+    $('.carton-button').click(function() {
         const color = $(this).data('color');
         const value = $(this).data('value');
         const id_arene = $(this).data('arene');
