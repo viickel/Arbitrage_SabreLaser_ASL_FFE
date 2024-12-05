@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     ///////////////////// TIMER /////////////////////
 
-    let timerDuration = 210; // in seconds
+    let timerDuration = 3*60;
     let timeLeft = timerDuration;
     let timerInterval;
     let isRunning = false;
