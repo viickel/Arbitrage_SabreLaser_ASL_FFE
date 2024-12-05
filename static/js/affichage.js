@@ -2,6 +2,9 @@ function updateDisplay() {
     const id_arene = $('.hidden').data('value');
 
     $.post(`/infos/${id_arene}`, function(data) {
+        $(`#nom_cbt_rouge`).text(data.arene.combattants["rouge"].nom);
+        $(`#nom_cbt_vert`).text(data.arene.combattants["vert"].nom);
+
         $(`#score_rouge`).text(data.arene["score"]['rouge']);
         $(`#score_vert`).text(data.arene["score"]['vert']);
         
