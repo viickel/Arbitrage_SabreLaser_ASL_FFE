@@ -49,6 +49,8 @@ h1 {
 
 button {
     padding: 10px 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 1rem;
     color: #1f1f1f;
     background-color: #00ff88;
@@ -61,6 +63,11 @@ button {
 button:hover {
     transform: scale(1.1);
     background-color: #00cc6e;
+}
+
+
+#reset-button:hover {
+    background-color: #ff6666;
 }
 
 button:active {

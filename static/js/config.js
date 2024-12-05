@@ -64,4 +64,23 @@ $(document).ready(function() {
             }
         });
     });
+
+    // Add Object
+    $('#reset-button').click(function() {
+        const container = $(this).closest('.object');
+        const id_arene = container.data('id');
+        const nom_cbt_rouge = container.find('input.nom_cbt_rouge');
+        const nom_cbt_vert = container.find('input.nom_cbt_vert');
+        const score_rouge = container.find('span.red-label');
+        const score_vert = container.find('span.green-label');
+
+        $.post(`/reset/${id_arene}`, function(response) {
+            nom_cbt_rouge.val(response.arene.combattants["rouge"].nom);
+            nom_cbt_vert.val(response.arene.combattants["vert"].nom);
+            score_rouge.text(`Rouge: ${response.arene.score["rouge"]}`);
+            score_vert.text(`Vert: ${response.arene.score["vert"]}`);
+        }).fail(function() {
+            alert('Erreur dans la remise à zéro de l\'arène');
+        });
+    });
 });
