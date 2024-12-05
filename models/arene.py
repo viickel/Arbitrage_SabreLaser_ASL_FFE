@@ -116,12 +116,24 @@ class Arene(object):
 		d["last_action_msg"] = self.last_action_msg
 		return d
 
-	def vainqueur(self):
-		# vérifier que la fin du match a eu lieu
-
-		if self.score["rouge"] > self.score["vert"]:
-			return  f"Combattant rouge : {self.combattants["rouge"].nom}"
-		elif self.score["rouge"] < self.score["vert"]:
-			return  f"Combattant vert : {self.combattants["vert"].nom}"
-		else:
-			return "Match nul"
+	def reset(self):
+		self.combattants["rouge"].nom = f"Rouge{self._id}"
+		self.combattants["vert"].nom = f"Vert{self._id}"
+		self.score = {
+			"rouge":0,
+			"vert":0
+		}
+		self.cartons = {
+			"rouge":{
+				"blanc":0,
+				"jaune":0,
+				"rouge":0
+			},
+			"vert":{
+				"blanc":0,
+				"jaune":0,
+				"rouge":0
+			}
+		}
+		self.historique = []
+		self.last_action_msg = ""
