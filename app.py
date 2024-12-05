@@ -63,6 +63,11 @@ def supprimerArene():
     _id = competition.supprimerArene(-1)._id
     return {'message': f'Arène {_id} supprimée'}
 
+@app.route('/reset/<int:id_arene>', methods=['POST'])
+def resetArene(id_arene):
+    competition.arenes[id_arene].reset()
+    return jsonify(arene=competition.arenes[id_arene].to_json())
+
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])
 def incrementScore(id_arene, combattant, valeur):
