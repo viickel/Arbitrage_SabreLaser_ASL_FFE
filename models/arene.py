@@ -2,7 +2,7 @@ from datetime import datetime
 
 class Arene(object):
 	"""docstring for Arene"""
-	def __init__(self, _id, combattant_rouge, combattant_vert):
+	def __init__(self, _id, combattant_rouge, combattant_vert, chrono):
 		super(Arene, self).__init__()
 		self._id = _id
 		self.combattants = {
@@ -27,10 +27,7 @@ class Arene(object):
 		}
 		self.historique = [] # TODO: créer un objet log
 		self.last_action_msg = ""
-		# TODO
-		# self.chrono
-		# self.statut = "en attente"
-
+		self.chrono = chrono
 		
 	def ajouterCarton(self, combattant, couleur):
 		# on ajoute un carton
@@ -114,6 +111,7 @@ class Arene(object):
 		d["cartons"] = self.cartons
 		d["historique"] = self.historique
 		d["last_action_msg"] = self.last_action_msg
+		d["remaining_time"] = self.chrono.remainingTime()
 		return d
 
 	def reset(self):

@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 # Déclaration de l'objet Competition
 # contenant une liste d'arènes
-arenes = [None] + [Arene(x+1, Combattant(f"Rouge{x+1}"), Combattant(f"Vert{x+1}")) for x in range(5)]
+arenes = [None] + [Arene(x+1, Combattant(f"Rouge{x+1}"), Combattant(f"Vert{x+1}"), Chronometre(3*60)) for x in range(5)]
 competition = Competition(arenes)
 
 @app.route('/affichage/<int:id_arene>')
@@ -67,6 +67,33 @@ def supprimerArene():
 def resetArene(id_arene):
     competition.arenes[id_arene].reset()
     return jsonify(arene=competition.arenes[id_arene].to_json())
+
+
+################### Routes pour le timer ###################
+@app.route('/start-timer/<int:id_arene>', methods=['POST'])
+def startTimer(id_arene):
+    competition.arenes[id_arene].chrono.start()
+    return {"message": f"arene {id_arene} started"}
+
+@app.route('/pause-timer/<int:id_arene>', methods=['POST'])
+def pauseTimer(id_arene):
+    competition.arenes[id_arene].chrono.pause()
+    return {"message": f"arene {id_arene} paused"}
+
+@app.route('/reset-timer/<int:id_arene>', methods=['POST'])
+def resetTimer(id_arene):
+    competition.arenes[id_arene].chrono.reset()
+    return {"message": f"arene {id_arene} reset"}
+
+@app.route('/add-seconds/<int:id_arene>/<int:seconds>', methods=['POST'])
+def addSeconds(id_arene, seconds):
+    competition.arenes[id_arene].chrono.addSeconds(seconds)
+    return {"message": f"added {seconds}s to arene {id_arene}"}
+
+@app.route('/sub-seconds/<int:id_arene>/<int:seconds>', methods=['POST'])
+def subSeconds(id_arene, seconds):
+    competition.arenes[id_arene].chrono.subSeconds(seconds)
+    return {"message": f"remove {seconds}s to arene {id_arene}"}
 
 ################### Routes pour l'arbitrage ###################
 @app.route('/increment-score/<int:id_arene>/<combattant>/<int:valeur>', methods=['POST'])

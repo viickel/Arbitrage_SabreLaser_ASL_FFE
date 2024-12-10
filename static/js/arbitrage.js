@@ -54,67 +54,45 @@ $(document).ready(function() {
     }
 
     ///////////////////// TIMER /////////////////////
-
-    let timerDuration = 3*60;
-    let timeLeft = timerDuration;
-    let timerInterval;
-    let isRunning = false;
-
     const timerValue = document.getElementById('timer-value');
+
+    const id_arene = $('.hidden').data('value');
+
+    function updateTimerDisplay() {
+        $.post(`/infos/${id_arene}`, function(data) {
+            let minutes = Math.floor(data.arene.remaining_time / 60).toString().padStart(2, '0');
+            let seconds = (data.arene.remaining_time % 60).toString().padStart(2, '0');
+            timerValue.textContent = `${minutes}:${seconds}`;
+        });
+    }
+
+    function startTimer() {
+        $.post(`/start-timer/${id_arene}`, function(data) {});
+    }
+
+    function pauseTimer() {
+        $.post(`/pause-timer/${id_arene}`, function(data) {});
+    }
+
+    function resetTimer() {
+        $.post(`/reset-timer/${id_arene}`, function(data) {});
+    }
+
+    function incTimer() {
+        // ajouter 5 secondes
+        $.post(`/add-seconds/${id_arene}/5`, function(data) {});
+    }
+
+    function decTimer() {
+        // enlever 5 secondes
+        $.post(`/sub-seconds/${id_arene}/5`, function(data) {});
+    }
+
     const playBtn = document.getElementById('start-button');
     const pauseBtn = document.getElementById('pause-button');
     const resetBtn = document.getElementById('reset-button');
     const plusBtn = document.getElementById('plus-button');
     const minusBtn = document.getElementById('minus-button');
-
-    function updateTimerDisplay() {
-        let minutes = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-        let seconds = (timeLeft % 60).toString().padStart(2, '0');
-        timerValue.textContent = `${minutes}:${seconds}`;
-
-        // Enable or disable the clickable button based on timeLeft
-        plusBtn.disabled = isRunning == true;
-        minusBtn.disabled = isRunning == true;
-    }
-
-    function startTimer() {
-        if (!isRunning) {
-            timerInterval = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateTimerDisplay();
-                } else {
-                    clearInterval(timerInterval);
-                    isRunning = false;
-                }
-            }, 1000);
-            isRunning = true;
-        }
-    }
-
-    function pauseTimer() {
-        clearInterval(timerInterval);
-        isRunning = false;
-        updateTimerDisplay();
-    }
-
-    function resetTimer() {
-        clearInterval(timerInterval);
-        timeLeft = timerDuration;
-        isRunning = false;
-        updateTimerDisplay();
-    }
-
-    function incTimer() {
-        timeLeft += 5;
-        updateTimerDisplay();
-    }
-
-    function decTimer() {
-        timeLeft -= 5;
-        updateTimerDisplay();
-    }
-
     // Event listeners for buttons
     playBtn.addEventListener('click', startTimer);
     pauseBtn.addEventListener('click', pauseTimer);
@@ -122,6 +100,5 @@ $(document).ready(function() {
     plusBtn.addEventListener('click', incTimer);
     minusBtn.addEventListener('click', decTimer);
 
-    // Initialize display on load
-    updateTimerDisplay();
+    setInterval(() => {updateTimerDisplay();}, 500);
 });
