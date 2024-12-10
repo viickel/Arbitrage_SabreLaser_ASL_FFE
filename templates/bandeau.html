@@ -3,6 +3,7 @@
 {% block head %}
     <title>Affichage des Scores</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bandeau.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chrono.css') }}">
     <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
 {% endblock %}
 
@@ -29,6 +30,12 @@
                 <div class="score-label">
                     <span id="nom_cbt_rouge">{{ arene.combattants['rouge'].nom }}</span>: <span id="score_rouge">{{ arene.score['rouge'] }}</span>
                 </div>
+            </div>
+        </div>
+
+        <div class="timer-container display">
+            <div class="timer-display">
+                <div class="timer-value" id="timer-value">00:00</div>
             </div>
         </div>
 
