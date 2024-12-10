@@ -3,6 +3,7 @@
 {% block head %}
     <title>Affichage des Scores</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/affichage.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/chrono.css') }}">
     <script src="{{ url_for('static', filename='js/affichage.js') }}"></script>
 {% endblock %}
 
@@ -33,6 +34,12 @@
 		                <button class="carton-label red" id="cbt_rouge_carton_rouge">{{ arene.cartons['rouge']['rouge'] }}</button>
 		            </div>
 		        </div>
+		    </div>
+
+		    <div class="timer-container display">
+	            <div class="timer-display">
+	                <div class="timer-value" id="timer-value">00:00</div>
+	            </div>
 		    </div>
 
 		    <!-- Green Side -->

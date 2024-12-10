@@ -14,6 +14,10 @@ function updateDisplay() {
         $(`#cbt_vert_carton_blanc`).text(data.arene['cartons']['vert']['blanc']);
         $(`#cbt_vert_carton_jaune`).text(data.arene['cartons']['vert']['jaune']);
         $(`#cbt_vert_carton_rouge`).text(data.arene['cartons']['vert']['rouge']);
+
+        let minutes = Math.floor(data.arene.remaining_time / 60).toString().padStart(2, '0');
+        let seconds = (data.arene.remaining_time % 60).toString().padStart(2, '0');
+        $(`#timer-value`).text(`${minutes}:${seconds}`);
     });
 }
 
