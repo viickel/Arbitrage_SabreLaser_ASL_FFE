@@ -12,6 +12,7 @@
 {% block body %}
 <center>
 	<h1 class="arena-title">Arene #{{ arene._id }}</h1>
+	<span class="hidden" data-value="{{ arene._id }}">
 
 	<div class="names-and-timer">
 		<!-- Red Side -->
@@ -46,7 +47,7 @@
 	        <div class="timer-row">
 	            <button id="plus-button">+</button>
 	            <div class="timer-display">
-	                <div class="timer-value" id="timer-value">03:30</div>
+	                <div class="timer-value" id="timer-value">03:00</div>
 	            </div>
 	            <button id="minus-button">−</button>
 	        </div>
