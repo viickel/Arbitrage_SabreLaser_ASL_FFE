@@ -12,6 +12,10 @@
     box-shadow: 0 0 20px rgba(0, 204, 255, 0.8);
 }
 
+.timer-container.display {
+    width: auto;
+}
+
 /* Timer Row Layout */
 .timer-row {
     display: flex;
