@@ -13,6 +13,7 @@ $(document).ready(function() {
                     <button class="save-button" style="display: none;">Save</button>
                     <span class="label green-label">Vert: ${response.arene.score['vert']}</span>
                     <input type="text" class="nom_cbt_vert readonly" value="${response.arene.combattants['vert'].nom}" readonly>
+                    <button id="reset-button">Reset</button>
                 </div>`;
             objectList.append(newDiv);
         }).fail(function() {

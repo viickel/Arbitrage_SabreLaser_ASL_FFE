@@ -53,7 +53,7 @@ def changeNomCbt(id_arene):
 @app.route('/ajouter-arene', methods=['POST'])
 def ajouterArene():
     x = len(competition.arenes)
-    a = Arene(x, Combattant(f"Rouge{x}"), Combattant(f"Vert{x}"))
+    a = Arene(x, Combattant(f"Rouge{x}"), Combattant(f"Vert{x}"), Chronometre(3*60))
     competition.ajouterArene(a)
     return jsonify(arene=a.to_json())
 
