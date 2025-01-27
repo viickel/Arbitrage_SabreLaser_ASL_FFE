@@ -21,12 +21,12 @@ body {
 
 .arena-title {
     font-family: 'Anton', sans-serif;
-    font-size: 3rem;
+    font-size: 1rem;
     text-transform: uppercase;
     color: #00ccff;
     text-shadow: 0 0 100px #00ccff, 0 0 150px #00ccff, 0 0 200px #00ccff;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     background: linear-gradient(135deg, #1f1f1f, #292929);
     box-shadow: 0 0 30px rgba(0, 204, 255, 0.8);
@@ -34,12 +34,12 @@ body {
 }
 
 body.affichage h1 {
-    font-size: 50px;  /* Taille de police des titres */
+    font-size: 30px;  /* Taille de police des titres */
     color: white;
 }
 
 body.affichage p {
-    font-size: 40px;  /* Taille de police des paragraphes */
+    font-size: 30px;  /* Taille de police des paragraphes */
     color: white;
 }
 
@@ -47,7 +47,7 @@ body.affichage p {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
     padding: 10px;
 }
 
@@ -60,7 +60,7 @@ body.affichage p {
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
-    width: 75%;
+    width: 50%;
 }
 
 /* Columns for Red and Green Sides */
@@ -95,7 +95,7 @@ body.affichage p {
 
 .score-label {
     font-family: 'Anton', sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     text-transform: uppercase;
     color: #fff;
     text-shadow: 0 0 10px #00ff88;
@@ -105,7 +105,7 @@ body.affichage p {
 .score-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 /* Futuristic Button */

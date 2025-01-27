@@ -119,4 +119,4 @@ def infos(id_arene):
 
 if __name__ == '__main__':
     # L'application écoute sur toutes les interfaces réseau (0.0.0.0) sur le port 5000
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
