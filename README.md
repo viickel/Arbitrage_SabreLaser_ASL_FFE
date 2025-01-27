@@ -1,4 +1,4 @@
-#Comment utiliser l'application 
+# Comment utiliser l'application 
 Après avoir démarer l'application dans votre editeur Python on peut utiliser plusieurs pages web  : 
 + Adresse_Ip_du_PC:5000/configuration - Permet d'ajouter ou de supprimer des arene, remet a zero les points sur une arene et changer les noms des combatants
 + Adresse_Ip_du_PC:5000//Arene/XX - Remplacer le XX par le numero d'arene, cette interface permet aux e-arbitre de gérer les match
