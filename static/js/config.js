@@ -67,7 +67,7 @@ $(document).ready(function() {
     });
 
     // Add Object
-    $('#reset-button').click(function() {
+    $(document).on('click', '.reset-button', function() {
         const container = $(this).closest('.object');
         const id_arene = container.data('id');
         const nom_cbt_rouge = container.find('input.nom_cbt_rouge');
