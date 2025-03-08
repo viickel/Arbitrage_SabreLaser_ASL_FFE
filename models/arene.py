@@ -135,3 +135,4 @@ class Arene(object):
 		}
 		self.historique = []
 		self.last_action_msg = ""
+		self.chrono.reset()
