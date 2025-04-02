@@ -66,7 +66,7 @@ button:hover {
 }
 
 
-#reset-button:hover {
+.reset-button:hover {
     background-color: #ff6666;
 }
 
